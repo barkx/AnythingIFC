@@ -1,6 +1,8 @@
 // Constants shared by apps/www and apps/app. See PLAN.md §5–6.
 
+// "draft" = created, files still uploading; never listed publicly.
 export const PROJECT_STATUSES = [
+  "draft",
   "submitted",
   "in_progress",
   "needs_info",
@@ -10,11 +12,66 @@ export const PROJECT_STATUSES = [
 export type ProjectStatus = (typeof PROJECT_STATUSES)[number];
 
 export const PROJECT_STATUS_LABELS: Record<ProjectStatus, string> = {
+  draft: "Draft",
   submitted: "Submitted",
   in_progress: "In progress",
   needs_info: "Needs info",
   completed: "Completed",
   rejected: "Rejected",
+};
+
+export const BUILDING_TYPES = [
+  "house",
+  "apartment_building",
+  "office",
+  "industrial",
+  "public",
+  "other",
+] as const;
+export type BuildingType = (typeof BUILDING_TYPES)[number];
+
+export const BUILDING_TYPE_LABELS: Record<BuildingType, string> = {
+  house: "House",
+  apartment_building: "Apartment building",
+  office: "Office",
+  industrial: "Industrial / warehouse",
+  public: "Public building",
+  other: "Other",
+};
+
+export type ProjectFile = {
+  pathname: string;
+  url: string;
+  filename: string;
+  size: number;
+  contentType: string;
+};
+
+export type ProjectEvent = {
+  at: string;
+  by: "creator" | "admin" | "system";
+  status: ProjectStatus;
+  note?: string;
+};
+
+// Everything here is safe to show to any visitor.
+export type PublicProject = {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  title: string;
+  description: string;
+  buildingType?: BuildingType;
+  storeys?: number;
+  approxAreaM2?: number;
+  units: "m" | "ft";
+  authorName: string;
+  status: ProjectStatus;
+  published: boolean;
+  adminMessage?: string;
+  inputs: ProjectFile[];
+  outputs: ProjectFile[];
+  events: ProjectEvent[];
 };
 
 export const USER_TYPES = [

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { AppHeader } from "@/components/app-header";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,8 +14,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "IFCWise App",
-  description: "Upload drawings and download IFC models.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3001"),
+  title: {
+    default: "IFCWise Projects",
+    template: "%s · IFCWise",
+  },
+  description: "Public projects turning drawings, sketches and descriptions into IFC building models.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -23,7 +28,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <AppHeader />
+        <div className="flex flex-1 flex-col">{children}</div>
+      </body>
     </html>
   );
 }

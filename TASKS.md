@@ -35,17 +35,19 @@ tick it when done (`- [x]`), and add a short note after it if useful. Details fo
 - [x] Mobile check at 375 px
 
 ## Phase 2 — Projects on Blob (`apps/app`)
-- [ ] Add `@vercel/blob`, `zod`; Blob store connected locally (`vercel env pull` or `BLOB_READ_WRITE_TOKEN` in `.env.local`)
-- [ ] `packages/shared`: `Project` type, statuses, limits (done partly in Phase 1)
-- [ ] `lib/crypto.ts`: AES-256-GCM email encryption, manage-token generation + SHA-256 hash
-- [ ] `lib/blob.ts`: path helpers, filename sanitising, allowed types/sizes
-- [ ] `lib/projects.ts`: create/read/update/delete `project.json`, public serialiser, cache tags
-- [ ] `/new` form: project fields, display name, email, honeypot, consent checkboxes
-- [ ] `/api/upload` client-upload handler (`handleUpload`) with path/type/size checks; per-file progress in the form
-- [ ] Submit flow: create project → upload files → finalise → show project link + manage link once
-- [ ] `/p/[id]` project page (status timeline, description, input list, admin message); `noindex` until published
-- [ ] `/p/[id]/manage?t=…`: edit text, add files, reply when `needs_info`, delete
-- [ ] Per-IP limit on project creation (3/day)
+- [x] Add `@vercel/blob`, `zod`, `server-only`
+- [ ] Connect a Blob store locally: create a store in Vercel → Storage, put `BLOB_READ_WRITE_TOKEN` in `apps/app/.env.local` _(user)_
+- [x] `packages/shared`: `PublicProject`, `ProjectFile`, `ProjectEvent`, statuses (+ `draft`), building types
+- [x] `lib/crypto.ts`: AES-256-GCM email encryption, manage tokens + SHA-256 hash, project IDs, IP hash
+- [x] `lib/blob-paths.ts`: path helpers, filename sanitising, allowed types
+- [x] `lib/projects.ts`: read (origin, no CDN cache) / write with `ifMatch` / update with retry / public serialiser / delete
+- [x] `/new` form: project fields, display name, email, honeypot, consent checkboxes, file picker with progress
+- [x] `/api/upload` client-upload token handler: manage-token check, path prefix, file type, size, file count
+- [x] Submit flow: `createProject` (draft) → browser uploads to Blob → `attachFiles` verifies with `head()` → submitted; links shown once
+- [x] `/p/[id]` project page (status, description, files, history); `noindex` for now
+- [x] `/p/[id]/manage?t=…`: finish draft, reply to admin message, add files, edit details, delete
+- [x] Per-IP limit on project creation (3/day, marker blobs under `ratelimit/`)
+- [ ] End-to-end test with a real Blob store: create with files, view, manage, add files, edit, delete
 
 ## Phase 3 — Public gallery
 - [ ] `/` gallery of published projects (cached, revalidated on every write)
@@ -86,6 +88,7 @@ tick it when done (`- [x]`), and add a short note after it if useful. Details fo
 - [ ] Push to GitHub (barkx/AnythingIFC)
 - [ ] Vercel project `ifcwise-www` (root `apps/www`) and `ifcwise-app` (root `apps/app`)
 - [ ] Create Vercel Blob store, connect to `ifcwise-app`; set env vars (PLAN.md §12)
-- [ ] DNS: ifcwise.com nameservers → Vercel; `ifcwise.com`, `www` (redirect), `app.ifcwise.com`
+- [x] DNS: ifcwise.com nameservers → Vercel (ns1/ns2.vercel-dns.com, set 2026-10-27)
+- [ ] Add domains in Vercel: `ifcwise.com` + `www` (redirect) → ifcwise-www; `app.ifcwise.com` → ifcwise-app
 - [ ] Fill legal entity details; review privacy/terms
 - [ ] Soft launch: 10 test projects, share gallery

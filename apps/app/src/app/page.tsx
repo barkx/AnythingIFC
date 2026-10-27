@@ -1,14 +1,19 @@
-import { PROJECT_STATUS_LABELS } from "@ifcwise/shared";
+import Link from "next/link";
 
+// Phase 3 replaces this with the public gallery.
 export default function Home() {
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col justify-center gap-6 px-4 py-24 sm:px-8">
-      <p className="font-mono text-sm tracking-widest text-zinc-500 uppercase">IFCWise App</p>
-      <h1 className="text-3xl font-semibold tracking-tight">Proof of concept</h1>
-      <p className="text-zinc-600 dark:text-zinc-400">
-        Public projects, uploads, admin and the IFC viewer arrive in phases 2–5 (see TASKS.md).
+    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col justify-center gap-6 px-4 py-24 sm:px-6">
+      <p className="font-mono text-xs tracking-widest text-accent uppercase">Public projects</p>
+      <h1 className="text-3xl font-semibold tracking-tight">The project gallery is coming soon.</h1>
+      <p className="text-muted">
+        Start a project now — once it&apos;s reviewed it will appear here for everyone to see.
       </p>
-      <p className="font-mono text-xs text-zinc-500">Project states: {Object.values(PROJECT_STATUS_LABELS).join(" · ")}</p>
+      <div>
+        <Link href="/new" className="inline-block rounded-md bg-accent px-5 py-3 text-sm font-medium text-accent-foreground">
+          Start a project
+        </Link>
+      </div>
     </main>
   );
 }
