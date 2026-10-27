@@ -18,7 +18,9 @@ export async function readProject(id: string): Promise<Loaded | null> {
   const result = await get(projectJsonPath(id), { access: "public", useCache: false, token: env.blobToken() });
   if (!result || result.statusCode !== 200) return null;
   const project = (await new Response(result.stream).json()) as StoredProject;
-  return { project, etag: result.blob.etag };
+  // Reads can come back with a weak ETag (W/"…", the CDN compresses JSON) while put's ifMatch compares the
+  // strong form — same version id, so drop the W/ prefix or every conditional write fails.
+  return { project, etag: result.blob.etag.replace(/^W\//, "") };
 }
 
 export async function writeProject(project: StoredProject, etag?: string): Promise<void> {
@@ -41,7 +43,9 @@ export async function updateProject(
   for (let attempt = 0; attempt < 2; attempt++) {
     const loaded = await readProject(id);
     if (!loaded) return null;
-    const next = change(structuredClone(loaded.project)) ?? loaded.project;
+    // `change` mutates the draft in place (or returns a replacement); never fall back to the unmodified original.
+    const draft = structuredClone(loaded.project);
+    const next = change(draft) ?? draft;
     next.updatedAt = new Date().toISOString();
     try {
       await writeProject(next, loaded.etag);

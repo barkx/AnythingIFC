@@ -158,7 +158,9 @@ def render_prompt(job_dir: Path, job: dict[str, Any], report: PrepareReport) -> 
         trim_blocks=True,
         lstrip_blocks=True,
     )
-    text = env.get_template("PROMPT.md.j2").render(job=job, report=report)
+    # Optional project fields are omitted from job.json when the creator left them empty.
+    defaults = {"buildingType": None, "storeys": None, "approxAreaM2": None, "units": "m", "inputs": []}
+    text = env.get_template("PROMPT.md.j2").render(job={**defaults, **job}, report=report)
     target = job_dir / "PROMPT.md"
     target.write_text(text, encoding="utf-8")
     return target

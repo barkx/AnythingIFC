@@ -1,0 +1,26 @@
+# Files never uploaded by `vercel deploy` from the repo root (Git-based deploys use the repo itself).
+
+# Secrets — only the .env.example templates may be uploaded
+.env
+.env.*
+**/.env
+**/.env.*
+!**/.env.example
+
+# Dependencies and build output (Vercel installs and builds itself)
+node_modules
+**/node_modules
+**/.next
+**/out
+apps/app/public/vendor
+*.tsbuildinfo
+
+# Local tooling
+.git
+.vercel
+**/.vercel
+.claude
+tools/ifc-tools/.venv
+**/__pycache__
+**/.pytest_cache
+**/.ruff_cache

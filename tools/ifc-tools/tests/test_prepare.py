@@ -86,3 +86,14 @@ def test_prepare_without_job_json_fails(tmp_path: Path):
         assert "pull" in str(error)
     else:
         raise AssertionError("expected FileNotFoundError")
+
+
+def test_prepare_with_minimal_job(tmp_path: Path):
+    # Real job.json files omit optional fields the creator left empty.
+    (tmp_path / "input").mkdir()
+    minimal = {"id": "abcdefgh23", "title": "Minimal", "description": "Just text.", "inputs": []}
+    (tmp_path / "job.json").write_text(json.dumps(minimal), encoding="utf-8")
+    prepare(tmp_path)
+    prompt = (tmp_path / "PROMPT.md").read_text(encoding="utf-8")
+    assert "Building type: not given" in prompt
+    assert "No files" in prompt
