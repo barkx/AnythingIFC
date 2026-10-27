@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
-  transpilePackages: ["@ifcwise/shared"],
+  transpilePackages: ["@ifcwise/shared", "@ifcwise/ui"],
   images: {
     remotePatterns: [{ protocol: "https", hostname: "*.public.blob.vercel-storage.com" }],
   },

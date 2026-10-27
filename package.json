@@ -16,7 +16,8 @@
     "lint": "npm run lint --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "tools": "uv run --project tools/ifc-tools ifc-tools",
-    "test:tools": "uv run --project tools/ifc-tools pytest"
+    "test:tools": "uv run --project tools/ifc-tools pytest",
+    "samples": "uv run --project tools/ifc-tools python tools/ifc-tools/samples/build_samples.py"
   },
   "devDependencies": {
     "concurrently": "^10.0.6"

@@ -13,8 +13,8 @@ export const metadata: Metadata = { title: "Admin · project", robots: { index: 
 
 export default function AdminProjectPage({ params }: PageProps<"/admin/p/[id]">) {
   return (
-    <main className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6">
-      <Link href="/admin" className="text-sm text-muted hover:text-foreground">
+    <main>
+      <Link href="/admin" className="mx-auto block w-full max-w-6xl px-4 pt-6 text-sm text-muted hover:text-foreground sm:px-6">
         ← All projects
       </Link>
       <Suspense fallback={<p className="mt-8 text-muted">Loading…</p>}>
@@ -40,9 +40,6 @@ async function Content({ params }: { params: PageProps<"/admin/p/[id]">["params"
   }
 
   return (
-    <div className="mt-6 grid gap-10 lg:grid-cols-[1fr_380px]">
-      <ProjectView project={project} />
-      <AdminPanel project={project} email={email} />
-    </div>
+    <ProjectView project={project} aside={<AdminPanel project={project} email={email} />} />
   );
 }

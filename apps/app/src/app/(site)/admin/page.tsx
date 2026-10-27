@@ -14,9 +14,12 @@ export default function AdminPage() {
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6">
       <div className="flex items-center justify-between gap-4">
-        <h1 className="text-3xl font-semibold tracking-tight">Admin</h1>
+        <div>
+          <p className="text-sm font-semibold text-accent">Admin</p>
+          <h1 className="mt-1 text-3xl font-semibold tracking-tight">Review queue</h1>
+        </div>
         <form action={logout}>
-          <button className="text-sm text-muted hover:text-foreground">Log out</button>
+          <button className="rounded-lg px-3 py-1.5 text-sm text-muted hover:bg-surface-2 hover:text-foreground">Log out</button>
         </form>
       </div>
       <Suspense fallback={<p className="mt-8 text-muted">Loading projects…</p>}>
@@ -55,9 +58,9 @@ async function Queue() {
       {projects.length === 0 ? (
         <p className="mt-10 text-muted">No projects yet.</p>
       ) : (
-        <div className="mt-8 overflow-x-auto rounded-xl border border-border bg-surface">
+        <div className="mt-8 overflow-x-auto rounded-2xl border border-border bg-background shadow-soft">
           <table className="w-full min-w-[640px] text-left text-sm">
-            <thead className="border-b border-border text-xs text-muted uppercase">
+            <thead className="border-b border-border bg-surface text-xs text-muted">
               <tr>
                 <th className="px-4 py-3 font-medium">Project</th>
                 <th className="px-4 py-3 font-medium">Status</th>
@@ -97,7 +100,7 @@ async function Queue() {
 
 function Stat({ label, value, highlight }: { label: string; value: number; highlight?: boolean }) {
   return (
-    <div className={`rounded-lg border p-3 ${highlight ? "border-accent bg-accent-soft/40" : "border-border bg-surface"}`}>
+    <div className={`rounded-xl border p-4 ${highlight ? "border-accent bg-accent-soft/40" : "border-border bg-background shadow-soft"}`}>
       <dt className="text-xs text-muted">{label}</dt>
       <dd className="mt-1 text-2xl font-semibold">{value}</dd>
     </div>

@@ -97,11 +97,26 @@ tick it when done (`- [x]`), and add a short note after it if useful. Details fo
 - [ ] 3 test projects per input type on both routes; results in `docs/test-runs.md`
 - [ ] Pitched roofs in the model spec (currently flat only)
 
-## Phase 8 — Go live
-- [ ] Push to GitHub (barkx/AnythingIFC)
-- [ ] Vercel project `ifcwise-www` (root `apps/www`) and `ifcwise-app` (root `apps/app`)
-- [ ] Create Vercel Blob store, connect to `ifcwise-app`; set env vars (PLAN.md §12)
+## Phase 8 — Go live (follow docs/deploy.md)
+- [x] Push to GitHub (barkx/AnythingIFC)
 - [x] DNS: ifcwise.com nameservers → Vercel (ns1/ns2.vercel-dns.com, set 2026-10-27)
-- [ ] Add domains in Vercel: `ifcwise.com` + `www` (redirect) → ifcwise-www; `app.ifcwise.com` → ifcwise-app
-- [ ] Fill legal entity details; review privacy/terms
+- [x] Deployment guide: `docs/deploy.md`
+- [ ] Generate production secrets (SESSION_SECRET, ADMIN_API_TOKEN, EMAIL_ENCRYPTION_KEY, ADMIN_PASSWORD) _(user)_
+- [ ] Vercel project `ifcwise-www` (root `apps/www`) + env vars _(user)_
+- [ ] Vercel project `ifcwise-app` (root `apps/app`) + env vars _(user)_
+- [ ] Blob store `ifcwise-projects` (public, Frankfurt) connected to `ifcwise-app`, redeploy _(user)_
+- [ ] Domains: `ifcwise.com` + `www` redirect → ifcwise-www; `app.ifcwise.com` → ifcwise-app _(user)_
+- [ ] Re-create MX/SPF records in Vercel DNS if @ifcwise.com email is used _(user)_
+- [ ] `tools/ifc-tools/.env` pointing at production
+- [ ] End-to-end test on production (docs/deploy.md §7)
+- [ ] Fill legal entity details (`apps/www/src/lib/site.ts`); review privacy/terms
 - [ ] Soft launch: 10 test projects, share gallery
+
+## Design refresh (2026-10-27)
+- [x] `packages/ui` design system shared by both apps (tokens, header, footer, buttons, pills)
+- [x] Landing page: hero with live 3D model + input plan, stats, how it works, bento features, reference projects, use cases, FAQ, CTA
+- [x] App: gallery with reference projects, reference project pages, embed route, restyled project/new/manage/admin pages
+- [x] Viewer: floating controls, category colours, room volumes hidden, model shown before classification finishes
+- [x] 4 reference projects (family house, row houses, small office, warehouse) via `npm run samples`
+- [ ] Deploy both projects and check the redesign on production
+- [ ] Replace the stock Open Graph image with one showing a reference model

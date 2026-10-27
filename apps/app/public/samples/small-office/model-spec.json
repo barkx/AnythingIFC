@@ -1,0 +1,1084 @@
+{
+ "project": "Small office",
+ "storeys": [
+  {
+   "name": "Ground Floor",
+   "elevation": 0.0,
+   "height": 3.5,
+   "slab": {
+    "outline": [
+     [
+      0,
+      0
+     ],
+     [
+      20.0,
+      0
+     ],
+     [
+      20.0,
+      12.0
+     ],
+     [
+      0,
+      12.0
+     ]
+    ]
+   },
+   "walls": [
+    {
+     "name": "Front",
+     "start": [
+      0.15,
+      0.15
+     ],
+     "end": [
+      19.85,
+      0.15
+     ],
+     "openings": [
+      {
+       "type": "window",
+       "offset": 0.9,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 3.6,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 6.300000000000001,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "door",
+       "offset": 8.5,
+       "width": 2.0,
+       "height": 2.4
+      },
+      {
+       "type": "window",
+       "offset": 11.700000000000001,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 14.4,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 17.1,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      }
+     ]
+    },
+    {
+     "name": "Right",
+     "start": [
+      19.85,
+      0.15
+     ],
+     "end": [
+      19.85,
+      11.85
+     ],
+     "openings": [
+      {
+       "type": "window",
+       "offset": 1.4,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 3.8,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 6.199999999999999,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 8.6,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      }
+     ]
+    },
+    {
+     "name": "Back",
+     "start": [
+      19.85,
+      11.85
+     ],
+     "end": [
+      0.15,
+      11.85
+     ],
+     "openings": [
+      {
+       "type": "window",
+       "offset": 0.9,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 3.6,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 6.300000000000001,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 9.000000000000002,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 11.700000000000001,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 14.4,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 17.1,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      }
+     ]
+    },
+    {
+     "name": "Left",
+     "start": [
+      0.15,
+      11.85
+     ],
+     "end": [
+      0.15,
+      0.15
+     ],
+     "openings": [
+      {
+       "type": "window",
+       "offset": 1.4,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 3.8,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 6.199999999999999,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 8.6,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      }
+     ]
+    },
+    {
+     "start": [
+      8.0,
+      4.0
+     ],
+     "end": [
+      12.0,
+      4.0
+     ],
+     "thickness": 0.25,
+     "openings": [
+      {
+       "type": "door",
+       "offset": 1.5,
+       "width": 1.0,
+       "height": 2.1
+      }
+     ]
+    },
+    {
+     "start": [
+      12.0,
+      4.0
+     ],
+     "end": [
+      12.0,
+      8.0
+     ],
+     "thickness": 0.25,
+     "openings": []
+    },
+    {
+     "start": [
+      12.0,
+      8.0
+     ],
+     "end": [
+      8.0,
+      8.0
+     ],
+     "thickness": 0.25,
+     "openings": []
+    },
+    {
+     "start": [
+      8.0,
+      8.0
+     ],
+     "end": [
+      8.0,
+      4.0
+     ],
+     "thickness": 0.25,
+     "openings": []
+    }
+   ],
+   "spaces": [
+    {
+     "name": "Open office west",
+     "outline": [
+      [
+       0.3,
+       0.3
+      ],
+      [
+       7.875,
+       0.3
+      ],
+      [
+       7.875,
+       11.7
+      ],
+      [
+       0.3,
+       11.7
+      ]
+     ]
+    },
+    {
+     "name": "Open office east",
+     "outline": [
+      [
+       12.125,
+       0.3
+      ],
+      [
+       19.7,
+       0.3
+      ],
+      [
+       19.7,
+       11.7
+      ],
+      [
+       12.125,
+       11.7
+      ]
+     ]
+    },
+    {
+     "name": "Core \u2014 stairs & lift",
+     "outline": [
+      [
+       8.125,
+       4.125
+      ],
+      [
+       11.875,
+       4.125
+      ],
+      [
+       11.875,
+       7.875
+      ],
+      [
+       8.125,
+       7.875
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "name": "First Floor",
+   "elevation": 3.5,
+   "height": 3.5,
+   "slab": {
+    "outline": [
+     [
+      0,
+      0
+     ],
+     [
+      20.0,
+      0
+     ],
+     [
+      20.0,
+      12.0
+     ],
+     [
+      0,
+      12.0
+     ]
+    ]
+   },
+   "walls": [
+    {
+     "name": "Front",
+     "start": [
+      0.15,
+      0.15
+     ],
+     "end": [
+      19.85,
+      0.15
+     ],
+     "openings": [
+      {
+       "type": "window",
+       "offset": 0.9,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 3.6,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 6.300000000000001,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 9.000000000000002,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 11.700000000000001,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 14.4,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 17.1,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      }
+     ]
+    },
+    {
+     "name": "Right",
+     "start": [
+      19.85,
+      0.15
+     ],
+     "end": [
+      19.85,
+      11.85
+     ],
+     "openings": [
+      {
+       "type": "window",
+       "offset": 1.4,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 3.8,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 6.199999999999999,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 8.6,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      }
+     ]
+    },
+    {
+     "name": "Back",
+     "start": [
+      19.85,
+      11.85
+     ],
+     "end": [
+      0.15,
+      11.85
+     ],
+     "openings": [
+      {
+       "type": "window",
+       "offset": 0.9,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 3.6,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 6.300000000000001,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 9.000000000000002,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 11.700000000000001,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 14.4,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 17.1,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      }
+     ]
+    },
+    {
+     "name": "Left",
+     "start": [
+      0.15,
+      11.85
+     ],
+     "end": [
+      0.15,
+      0.15
+     ],
+     "openings": [
+      {
+       "type": "window",
+       "offset": 1.4,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 3.8,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 6.199999999999999,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 8.6,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      }
+     ]
+    },
+    {
+     "start": [
+      8.0,
+      4.0
+     ],
+     "end": [
+      12.0,
+      4.0
+     ],
+     "thickness": 0.25,
+     "openings": [
+      {
+       "type": "door",
+       "offset": 1.5,
+       "width": 1.0,
+       "height": 2.1
+      }
+     ]
+    },
+    {
+     "start": [
+      12.0,
+      4.0
+     ],
+     "end": [
+      12.0,
+      8.0
+     ],
+     "thickness": 0.25,
+     "openings": []
+    },
+    {
+     "start": [
+      12.0,
+      8.0
+     ],
+     "end": [
+      8.0,
+      8.0
+     ],
+     "thickness": 0.25,
+     "openings": []
+    },
+    {
+     "start": [
+      8.0,
+      8.0
+     ],
+     "end": [
+      8.0,
+      4.0
+     ],
+     "thickness": 0.25,
+     "openings": []
+    }
+   ],
+   "spaces": [
+    {
+     "name": "Open office west",
+     "outline": [
+      [
+       0.3,
+       0.3
+      ],
+      [
+       7.875,
+       0.3
+      ],
+      [
+       7.875,
+       11.7
+      ],
+      [
+       0.3,
+       11.7
+      ]
+     ]
+    },
+    {
+     "name": "Open office east",
+     "outline": [
+      [
+       12.125,
+       0.3
+      ],
+      [
+       19.7,
+       0.3
+      ],
+      [
+       19.7,
+       11.7
+      ],
+      [
+       12.125,
+       11.7
+      ]
+     ]
+    },
+    {
+     "name": "Core \u2014 stairs & lift",
+     "outline": [
+      [
+       8.125,
+       4.125
+      ],
+      [
+       11.875,
+       4.125
+      ],
+      [
+       11.875,
+       7.875
+      ],
+      [
+       8.125,
+       7.875
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Second Floor",
+   "elevation": 7.0,
+   "height": 3.5,
+   "slab": {
+    "outline": [
+     [
+      0,
+      0
+     ],
+     [
+      20.0,
+      0
+     ],
+     [
+      20.0,
+      12.0
+     ],
+     [
+      0,
+      12.0
+     ]
+    ]
+   },
+   "walls": [
+    {
+     "name": "Front",
+     "start": [
+      0.15,
+      0.15
+     ],
+     "end": [
+      19.85,
+      0.15
+     ],
+     "openings": [
+      {
+       "type": "window",
+       "offset": 0.9,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 3.6,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 6.300000000000001,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 9.000000000000002,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 11.700000000000001,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 14.4,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 17.1,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      }
+     ]
+    },
+    {
+     "name": "Right",
+     "start": [
+      19.85,
+      0.15
+     ],
+     "end": [
+      19.85,
+      11.85
+     ],
+     "openings": [
+      {
+       "type": "window",
+       "offset": 1.4,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 3.8,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 6.199999999999999,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 8.6,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      }
+     ]
+    },
+    {
+     "name": "Back",
+     "start": [
+      19.85,
+      11.85
+     ],
+     "end": [
+      0.15,
+      11.85
+     ],
+     "openings": [
+      {
+       "type": "window",
+       "offset": 0.9,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 3.6,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 6.300000000000001,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 9.000000000000002,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 11.700000000000001,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 14.4,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 17.1,
+       "width": 1.8,
+       "height": 2.0,
+       "sill": 0.8
+      }
+     ]
+    },
+    {
+     "name": "Left",
+     "start": [
+      0.15,
+      11.85
+     ],
+     "end": [
+      0.15,
+      0.15
+     ],
+     "openings": [
+      {
+       "type": "window",
+       "offset": 1.4,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 3.8,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 6.199999999999999,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      },
+      {
+       "type": "window",
+       "offset": 8.6,
+       "width": 1.4,
+       "height": 2.0,
+       "sill": 0.8
+      }
+     ]
+    },
+    {
+     "start": [
+      8.0,
+      4.0
+     ],
+     "end": [
+      12.0,
+      4.0
+     ],
+     "thickness": 0.25,
+     "openings": [
+      {
+       "type": "door",
+       "offset": 1.5,
+       "width": 1.0,
+       "height": 2.1
+      }
+     ]
+    },
+    {
+     "start": [
+      12.0,
+      4.0
+     ],
+     "end": [
+      12.0,
+      8.0
+     ],
+     "thickness": 0.25,
+     "openings": []
+    },
+    {
+     "start": [
+      12.0,
+      8.0
+     ],
+     "end": [
+      8.0,
+      8.0
+     ],
+     "thickness": 0.25,
+     "openings": []
+    },
+    {
+     "start": [
+      8.0,
+      8.0
+     ],
+     "end": [
+      8.0,
+      4.0
+     ],
+     "thickness": 0.25,
+     "openings": []
+    }
+   ],
+   "spaces": [
+    {
+     "name": "Open office west",
+     "outline": [
+      [
+       0.3,
+       0.3
+      ],
+      [
+       7.875,
+       0.3
+      ],
+      [
+       7.875,
+       11.7
+      ],
+      [
+       0.3,
+       11.7
+      ]
+     ]
+    },
+    {
+     "name": "Open office east",
+     "outline": [
+      [
+       12.125,
+       0.3
+      ],
+      [
+       19.7,
+       0.3
+      ],
+      [
+       19.7,
+       11.7
+      ],
+      [
+       12.125,
+       11.7
+      ]
+     ]
+    },
+    {
+     "name": "Core \u2014 stairs & lift",
+     "outline": [
+      [
+       8.125,
+       4.125
+      ],
+      [
+       11.875,
+       4.125
+      ],
+      [
+       11.875,
+       7.875
+      ],
+      [
+       8.125,
+       7.875
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "roof": {
+  "outline": [
+   [
+    0,
+    0
+   ],
+   [
+    20.0,
+    0
+   ],
+   [
+    20.0,
+    12.0
+   ],
+   [
+    0,
+    12.0
+   ]
+  ],
+  "thickness": 0.3
+ }
+}

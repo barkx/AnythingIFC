@@ -3,6 +3,16 @@
 Short log of architecture and convention decisions. Newest at the top.
 Format: date — decision — why — consequences.
 
+## 2026-10-27 — SaaS redesign, shared UI package, reference projects
+- **Decision:** both sites share `packages/ui` (tokens, header/footer, buttons) with zinc neutrals and a teal→cyan
+  accent, Geist, `lucide-react` icons, light + dark. Four reference projects are generated from Route B specs
+  (`npm run samples`) and shipped as static files in `apps/app/public/samples/` — IFC, summary, assumptions, spec and
+  an SVG ground-floor plan. ifcwise.com embeds the live viewer from `app.ifcwise.com/embed/samples/<slug>`.
+- **Why:** consistent look across both domains; reference projects show real output without Blob writes and work
+  offline; the generated plans double as the "input" drawings.
+- **Consequences:** the viewer colours categories and hides `IfcSpace` volumes. Re-run `npm run samples` after
+  changing the builder or specs.
+
 ## 2026-10-27 — IFC viewer: That Open Engine with pinned three and web-ifc
 - **Decision:** `@thatopen/components` 3.6 in a client-only component; fragments worker and web-ifc WASM
   self-hosted from `public/vendor`. Pinned via root `package.json` `overrides`: `three@0.182.0`,

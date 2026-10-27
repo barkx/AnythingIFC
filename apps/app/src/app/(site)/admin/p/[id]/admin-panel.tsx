@@ -4,7 +4,7 @@ import { ALLOWED_OUTPUT_EXTENSIONS, MAX_FILES_PER_PROJECT, PROJECT_STATUSES, PRO
 import { useRouter } from "next/navigation";
 import { useState, useTransition, type FormEvent, type ReactNode } from "react";
 import { FilePicker } from "@/components/file-picker";
-import { Button, ErrorText, inputClass } from "@/components/ui";
+import { Button, ErrorText, SuccessText, inputClass } from "@/components/ui";
 import { adminDeleteProject, attachOutputs, removeOutput, setMessage, setPublished, setStatus } from "@/lib/admin-actions";
 import { isAllowedOutput } from "@/lib/blob-paths";
 import type { ActionResult } from "@/lib/project-actions";
@@ -66,15 +66,9 @@ export function AdminPanel({ project, email }: { project: PublicProject; email: 
 
   const pullCommand = `npm run tools -- pull ${project.id}`;
   return (
-    <aside className="space-y-5 lg:sticky lg:top-6 lg:self-start">
+    <div className="space-y-5">
       {notice &&
-        (notice.kind === "error" ? (
-          <ErrorText>{notice.text}</ErrorText>
-        ) : (
-          <p role="status" className="text-sm text-accent">
-            {notice.text}
-          </p>
-        ))}
+        (notice.kind === "error" ? <ErrorText>{notice.text}</ErrorText> : <SuccessText>{notice.text}</SuccessText>)}
 
       <Card title="Creator">
         <p className="text-sm">{project.authorName}</p>
@@ -168,13 +162,13 @@ export function AdminPanel({ project, email }: { project: PublicProject; email: 
           Delete project
         </Button>
       </Card>
-    </aside>
+    </div>
   );
 }
 
 function Card({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <section className="rounded-xl border border-border bg-surface p-4">
+    <section className="rounded-2xl border border-border bg-background p-5 shadow-soft">
       <h2 className="mb-3 text-sm font-semibold">{title}</h2>
       {children}
     </section>

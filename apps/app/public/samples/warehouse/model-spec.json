@@ -1,0 +1,365 @@
+{
+ "project": "Warehouse with office",
+ "storeys": [
+  {
+   "name": "Ground Floor",
+   "elevation": 0.0,
+   "height": 7.0,
+   "slab": {
+    "outline": [
+     [
+      0,
+      0
+     ],
+     [
+      30.0,
+      0
+     ],
+     [
+      30.0,
+      20.0
+     ],
+     [
+      0,
+      20.0
+     ]
+    ],
+    "thickness": 0.25
+   },
+   "walls": [
+    {
+     "name": "Front",
+     "start": [
+      0.15,
+      0.15
+     ],
+     "end": [
+      29.85,
+      0.15
+     ],
+     "openings": [
+      {
+       "type": "window",
+       "offset": 1.5,
+       "width": 1.6,
+       "height": 1.2,
+       "sill": 0.9
+      },
+      {
+       "type": "window",
+       "offset": 4.5,
+       "width": 1.6,
+       "height": 1.2,
+       "sill": 0.9
+      },
+      {
+       "type": "door",
+       "offset": 7.0,
+       "width": 1.0,
+       "height": 2.2
+      },
+      {
+       "type": "door",
+       "offset": 13.0,
+       "width": 4.0,
+       "height": 4.5
+      },
+      {
+       "type": "door",
+       "offset": 20.0,
+       "width": 4.0,
+       "height": 4.5
+      }
+     ]
+    },
+    {
+     "name": "Right",
+     "start": [
+      29.85,
+      0.15
+     ],
+     "end": [
+      29.85,
+      19.85
+     ],
+     "openings": [
+      {
+       "type": "door",
+       "offset": 15.5,
+       "width": 1.0,
+       "height": 2.2
+      },
+      {
+       "type": "window",
+       "offset": 2.0,
+       "width": 3.0,
+       "height": 1.2,
+       "sill": 4.8
+      },
+      {
+       "type": "window",
+       "offset": 6.5,
+       "width": 3.0,
+       "height": 1.2,
+       "sill": 4.8
+      },
+      {
+       "type": "window",
+       "offset": 11.0,
+       "width": 3.0,
+       "height": 1.2,
+       "sill": 4.8
+      }
+     ]
+    },
+    {
+     "name": "Back",
+     "start": [
+      29.85,
+      19.85
+     ],
+     "end": [
+      0.15,
+      19.85
+     ],
+     "openings": [
+      {
+       "type": "window",
+       "offset": 2.0,
+       "width": 3.0,
+       "height": 1.2,
+       "sill": 4.8
+      },
+      {
+       "type": "window",
+       "offset": 6.5,
+       "width": 3.0,
+       "height": 1.2,
+       "sill": 4.8
+      },
+      {
+       "type": "window",
+       "offset": 11.0,
+       "width": 3.0,
+       "height": 1.2,
+       "sill": 4.8
+      },
+      {
+       "type": "window",
+       "offset": 15.5,
+       "width": 3.0,
+       "height": 1.2,
+       "sill": 4.8
+      },
+      {
+       "type": "window",
+       "offset": 20.0,
+       "width": 3.0,
+       "height": 1.2,
+       "sill": 4.8
+      },
+      {
+       "type": "window",
+       "offset": 24.5,
+       "width": 3.0,
+       "height": 1.2,
+       "sill": 4.8
+      }
+     ]
+    },
+    {
+     "name": "Left",
+     "start": [
+      0.15,
+      19.85
+     ],
+     "end": [
+      0.15,
+      0.15
+     ],
+     "openings": [
+      {
+       "type": "window",
+       "offset": 2.0,
+       "width": 3.0,
+       "height": 1.2,
+       "sill": 4.8
+      },
+      {
+       "type": "window",
+       "offset": 6.5,
+       "width": 3.0,
+       "height": 1.2,
+       "sill": 4.8
+      },
+      {
+       "type": "window",
+       "offset": 15.5,
+       "width": 1.6,
+       "height": 1.2,
+       "sill": 0.9
+      }
+     ]
+    },
+    {
+     "start": [
+      9.0,
+      0.3
+     ],
+     "end": [
+      9.0,
+      7.0
+     ],
+     "thickness": 0.12,
+     "openings": [
+      {
+       "type": "door",
+       "offset": 4.8,
+       "width": 0.9,
+       "height": 2.1
+      }
+     ]
+    },
+    {
+     "start": [
+      9.0,
+      7.0
+     ],
+     "end": [
+      0.3,
+      7.0
+     ],
+     "thickness": 0.12,
+     "openings": [
+      {
+       "type": "door",
+       "offset": 1.4,
+       "width": 0.9,
+       "height": 2.1
+      },
+      {
+       "type": "window",
+       "offset": 4.0,
+       "width": 2.0,
+       "height": 1.2,
+       "sill": 1.0
+      }
+     ]
+    },
+    {
+     "start": [
+      4.5,
+      0.3
+     ],
+     "end": [
+      4.5,
+      6.94
+     ],
+     "thickness": 0.12,
+     "openings": [
+      {
+       "type": "door",
+       "offset": 4.6,
+       "width": 0.8,
+       "height": 2.1
+      }
+     ]
+    }
+   ],
+   "spaces": [
+    {
+     "name": "Office",
+     "outline": [
+      [
+       0.3,
+       0.3
+      ],
+      [
+       4.44,
+       0.3
+      ],
+      [
+       4.44,
+       6.94
+      ],
+      [
+       0.3,
+       6.94
+      ]
+     ]
+    },
+    {
+     "name": "Staff room",
+     "outline": [
+      [
+       4.56,
+       0.3
+      ],
+      [
+       8.94,
+       0.3
+      ],
+      [
+       8.94,
+       6.94
+      ],
+      [
+       4.56,
+       6.94
+      ]
+     ]
+    },
+    {
+     "name": "Storage hall",
+     "outline": [
+      [
+       9.06,
+       0.3
+      ],
+      [
+       29.7,
+       0.3
+      ],
+      [
+       29.7,
+       19.7
+      ],
+      [
+       0.3,
+       19.7
+      ],
+      [
+       0.3,
+       7.06
+      ],
+      [
+       9.06,
+       7.06
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "roof": {
+  "outline": [
+   [
+    0,
+    0
+   ],
+   [
+    30.0,
+    0
+   ],
+   [
+    30.0,
+    20.0
+   ],
+   [
+    0,
+    20.0
+   ]
+  ],
+  "thickness": 0.3
+ }
+}

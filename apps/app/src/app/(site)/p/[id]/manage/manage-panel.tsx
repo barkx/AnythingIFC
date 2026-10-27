@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition, type FormEvent, type ReactNode } from "react";
 import { FilePicker } from "@/components/file-picker";
 import { ProjectFields, readDetails } from "@/components/project-fields";
-import { Button, ErrorText, StatusBadge, inputClass } from "@/components/ui";
+import { Button, ErrorText, StatusBadge, SuccessText, inputClass } from "@/components/ui";
 import { attachFiles, deleteProject, replyToAdmin, submitDraft, updateDetails, type ActionResult } from "@/lib/project-actions";
 import { uploadInputs } from "@/lib/upload-client";
 
@@ -88,8 +88,8 @@ export function ManagePanel({ project, manageToken }: { project: PublicProject; 
   return (
     <div className="space-y-8">
       <header>
-        <p className="font-mono text-xs tracking-widest text-accent uppercase">Manage project</p>
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight break-words">{project.title}</h1>
+        <p className="text-sm font-semibold text-accent">Manage project</p>
+        <h1 className="mt-2 text-3xl font-semibold tracking-tight break-words sm:text-4xl">{project.title}</h1>
         <div className="mt-3 flex flex-wrap items-center gap-3 text-sm">
           <StatusBadge status={project.status} />
           <Link href={`/p/${project.id}`} className="text-accent hover:underline">
@@ -99,13 +99,7 @@ export function ManagePanel({ project, manageToken }: { project: PublicProject; 
         <p className="mt-3 text-sm text-muted">Keep this page&apos;s link private — anyone with it can edit or delete the project.</p>
       </header>
 
-      {message && (
-        message.kind === "error" ? (
-          <ErrorText>{message.text}</ErrorText>
-        ) : (
-          <p role="status" className="text-sm text-accent">{message.text}</p>
-        )
-      )}
+      {message && (message.kind === "error" ? <ErrorText>{message.text}</ErrorText> : <SuccessText>{message.text}</SuccessText>)}
 
       {project.status === "draft" && (
         <Card title="Finish submitting">
@@ -167,7 +161,7 @@ export function ManagePanel({ project, manageToken }: { project: PublicProject; 
 
 function Card({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <section className="rounded-xl border border-border bg-surface p-5 sm:p-6">
+    <section className="rounded-2xl border border-border bg-background p-5 shadow-soft sm:p-6">
       <h2 className="mb-4 font-semibold">{title}</h2>
       {children}
     </section>

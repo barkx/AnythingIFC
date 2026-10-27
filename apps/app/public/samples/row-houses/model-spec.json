@@ -1,0 +1,563 @@
+{
+ "project": "Row houses",
+ "defaults": {
+  "storeyHeight": 2.9
+ },
+ "storeys": [
+  {
+   "name": "Ground Floor",
+   "elevation": 0.0,
+   "slab": {
+    "outline": [
+     [
+      0,
+      0
+     ],
+     [
+      13.0,
+      0
+     ],
+     [
+      13.0,
+      10.0
+     ],
+     [
+      0,
+      10.0
+     ]
+    ]
+   },
+   "walls": [
+    {
+     "name": "Front",
+     "start": [
+      0.15,
+      0.15
+     ],
+     "end": [
+      12.85,
+      0.15
+     ],
+     "openings": [
+      {
+       "type": "window",
+       "offset": 0.8,
+       "width": 1.4,
+       "height": 1.2,
+       "sill": 0.9
+      },
+      {
+       "type": "door",
+       "offset": 3.6,
+       "width": 1.0,
+       "height": 2.2
+      },
+      {
+       "type": "window",
+       "offset": 7.2,
+       "width": 1.4,
+       "height": 1.2,
+       "sill": 0.9
+      },
+      {
+       "type": "door",
+       "offset": 10.2,
+       "width": 1.0,
+       "height": 2.2
+      }
+     ]
+    },
+    {
+     "name": "Right",
+     "start": [
+      12.85,
+      0.15
+     ],
+     "end": [
+      12.85,
+      9.85
+     ],
+     "openings": []
+    },
+    {
+     "name": "Back",
+     "start": [
+      12.85,
+      9.85
+     ],
+     "end": [
+      0.15,
+      9.85
+     ],
+     "openings": [
+      {
+       "type": "window",
+       "offset": 1.2,
+       "width": 2.0,
+       "height": 1.2,
+       "sill": 0.9
+      },
+      {
+       "type": "window",
+       "offset": 4.2,
+       "width": 1.2,
+       "height": 1.2,
+       "sill": 0.9
+      },
+      {
+       "type": "window",
+       "offset": 7.4,
+       "width": 2.0,
+       "height": 1.2,
+       "sill": 0.9
+      },
+      {
+       "type": "window",
+       "offset": 10.6,
+       "width": 1.2,
+       "height": 1.2,
+       "sill": 0.9
+      }
+     ]
+    },
+    {
+     "name": "Left",
+     "start": [
+      0.15,
+      9.85
+     ],
+     "end": [
+      0.15,
+      0.15
+     ],
+     "openings": []
+    },
+    {
+     "start": [
+      6.5,
+      0.3
+     ],
+     "end": [
+      6.5,
+      9.7
+     ],
+     "thickness": 0.25,
+     "openings": []
+    },
+    {
+     "start": [
+      0.3,
+      5.6
+     ],
+     "end": [
+      6.375,
+      5.6
+     ],
+     "thickness": 0.12,
+     "openings": [
+      {
+       "type": "door",
+       "offset": 2.4,
+       "width": 0.9,
+       "height": 2.1
+      }
+     ]
+    },
+    {
+     "start": [
+      6.625,
+      5.6
+     ],
+     "end": [
+      12.7,
+      5.6
+     ],
+     "thickness": 0.12,
+     "openings": [
+      {
+       "type": "door",
+       "offset": 2.4,
+       "width": 0.9,
+       "height": 2.1
+      }
+     ]
+    }
+   ],
+   "spaces": [
+    {
+     "name": "House A \u2014 kitchen & dining",
+     "outline": [
+      [
+       0.3,
+       0.3
+      ],
+      [
+       6.375,
+       0.3
+      ],
+      [
+       6.375,
+       5.54
+      ],
+      [
+       0.3,
+       5.54
+      ]
+     ]
+    },
+    {
+     "name": "House A \u2014 living",
+     "outline": [
+      [
+       0.3,
+       5.659999999999999
+      ],
+      [
+       6.375,
+       5.659999999999999
+      ],
+      [
+       6.375,
+       9.7
+      ],
+      [
+       0.3,
+       9.7
+      ]
+     ]
+    },
+    {
+     "name": "House B \u2014 kitchen & dining",
+     "outline": [
+      [
+       6.625,
+       0.3
+      ],
+      [
+       12.7,
+       0.3
+      ],
+      [
+       12.7,
+       5.54
+      ],
+      [
+       6.625,
+       5.54
+      ]
+     ]
+    },
+    {
+     "name": "House B \u2014 living",
+     "outline": [
+      [
+       6.625,
+       5.659999999999999
+      ],
+      [
+       12.7,
+       5.659999999999999
+      ],
+      [
+       12.7,
+       9.7
+      ],
+      [
+       6.625,
+       9.7
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "name": "First Floor",
+   "elevation": 2.9,
+   "slab": {
+    "outline": [
+     [
+      0,
+      0
+     ],
+     [
+      13.0,
+      0
+     ],
+     [
+      13.0,
+      10.0
+     ],
+     [
+      0,
+      10.0
+     ]
+    ]
+   },
+   "walls": [
+    {
+     "name": "Front",
+     "start": [
+      0.15,
+      0.15
+     ],
+     "end": [
+      12.85,
+      0.15
+     ],
+     "openings": [
+      {
+       "type": "window",
+       "offset": 1.0,
+       "width": 1.2,
+       "height": 1.2,
+       "sill": 0.9
+      },
+      {
+       "type": "window",
+       "offset": 3.8,
+       "width": 1.2,
+       "height": 1.2,
+       "sill": 0.9
+      },
+      {
+       "type": "window",
+       "offset": 7.4,
+       "width": 1.2,
+       "height": 1.2,
+       "sill": 0.9
+      },
+      {
+       "type": "window",
+       "offset": 10.2,
+       "width": 1.2,
+       "height": 1.2,
+       "sill": 0.9
+      }
+     ]
+    },
+    {
+     "name": "Right",
+     "start": [
+      12.85,
+      0.15
+     ],
+     "end": [
+      12.85,
+      9.85
+     ],
+     "openings": []
+    },
+    {
+     "name": "Back",
+     "start": [
+      12.85,
+      9.85
+     ],
+     "end": [
+      0.15,
+      9.85
+     ],
+     "openings": [
+      {
+       "type": "window",
+       "offset": 1.2,
+       "width": 2.0,
+       "height": 1.2,
+       "sill": 0.9
+      },
+      {
+       "type": "window",
+       "offset": 4.2,
+       "width": 1.2,
+       "height": 1.2,
+       "sill": 0.9
+      },
+      {
+       "type": "window",
+       "offset": 7.4,
+       "width": 2.0,
+       "height": 1.2,
+       "sill": 0.9
+      },
+      {
+       "type": "window",
+       "offset": 10.6,
+       "width": 1.2,
+       "height": 1.2,
+       "sill": 0.9
+      }
+     ]
+    },
+    {
+     "name": "Left",
+     "start": [
+      0.15,
+      9.85
+     ],
+     "end": [
+      0.15,
+      0.15
+     ],
+     "openings": []
+    },
+    {
+     "start": [
+      6.5,
+      0.3
+     ],
+     "end": [
+      6.5,
+      9.7
+     ],
+     "thickness": 0.25,
+     "openings": []
+    },
+    {
+     "start": [
+      0.3,
+      5.0
+     ],
+     "end": [
+      6.375,
+      5.0
+     ],
+     "thickness": 0.12,
+     "openings": [
+      {
+       "type": "door",
+       "offset": 2.4,
+       "width": 0.9,
+       "height": 2.1
+      }
+     ]
+    },
+    {
+     "start": [
+      6.625,
+      5.0
+     ],
+     "end": [
+      12.7,
+      5.0
+     ],
+     "thickness": 0.12,
+     "openings": [
+      {
+       "type": "door",
+       "offset": 2.4,
+       "width": 0.9,
+       "height": 2.1
+      }
+     ]
+    }
+   ],
+   "spaces": [
+    {
+     "name": "House A \u2014 bedroom 1",
+     "outline": [
+      [
+       0.3,
+       0.3
+      ],
+      [
+       6.375,
+       0.3
+      ],
+      [
+       6.375,
+       4.94
+      ],
+      [
+       0.3,
+       4.94
+      ]
+     ]
+    },
+    {
+     "name": "House A \u2014 bedroom 2",
+     "outline": [
+      [
+       0.3,
+       5.06
+      ],
+      [
+       6.375,
+       5.06
+      ],
+      [
+       6.375,
+       9.7
+      ],
+      [
+       0.3,
+       9.7
+      ]
+     ]
+    },
+    {
+     "name": "House B \u2014 bedroom 1",
+     "outline": [
+      [
+       6.625,
+       0.3
+      ],
+      [
+       12.7,
+       0.3
+      ],
+      [
+       12.7,
+       4.94
+      ],
+      [
+       6.625,
+       4.94
+      ]
+     ]
+    },
+    {
+     "name": "House B \u2014 bedroom 2",
+     "outline": [
+      [
+       6.625,
+       5.06
+      ],
+      [
+       12.7,
+       5.06
+      ],
+      [
+       12.7,
+       9.7
+      ],
+      [
+       6.625,
+       9.7
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "roof": {
+  "outline": [
+   [
+    0,
+    0
+   ],
+   [
+    13.0,
+    0
+   ],
+   [
+    13.0,
+    10.0
+   ],
+   [
+    0,
+    10.0
+   ]
+  ],
+  "thickness": 0.25
+ }
+}

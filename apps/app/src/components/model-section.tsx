@@ -1,5 +1,8 @@
 import type { ModelSummary, PublicProject } from "@ifcwise/shared";
 import { cacheLife } from "next/cache";
+import { buttonClass } from "@ifcwise/ui";
+import { Box, Download, FileText } from "lucide-react";
+import { Assumptions, StatTiles, SummaryTable } from "@/components/model-details";
 import { ModelViewer } from "@/components/model-viewer";
 import { formatBytes } from "@/components/ui";
 
@@ -34,88 +37,46 @@ export async function ModelSection({ project }: { project: PublicProject }) {
 
   if (!ifc) {
     return (
-      <p className="mt-2 rounded-xl border border-dashed border-border p-6 text-center text-sm text-muted">
-        The IFC model will appear here when it&apos;s ready.
-      </p>
+      <div className="flex aspect-[16/10] flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-border bg-surface p-6 text-center">
+        <Box className="size-8 text-subtle" aria-hidden="true" />
+        <p className="font-medium">The IFC model will appear here</p>
+        <p className="text-sm text-muted">We&apos;ll email the creator as soon as it&apos;s ready.</p>
+      </div>
     );
   }
 
   return (
-    <div className="mt-3 space-y-6">
+    <div className="space-y-8">
       <ModelViewer url={ifc.url} />
-
-      <div className="flex flex-wrap gap-3">
-        <a
-          href={`${ifc.url}?download=1`}
-          className="rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground hover:opacity-90"
-        >
-          Download IFC ({formatBytes(ifc.size)})
+      <div className="flex flex-wrap gap-2">
+        <a href={`${ifc.url}?download=1`} className={buttonClass("accent", "md")}>
+          <Download className="size-4" aria-hidden="true" />
+          Download IFC · {formatBytes(ifc.size)}
         </a>
         {project.outputs
           .filter((f) => f !== ifc)
           .map((f) => (
-            <a key={f.pathname} href={`${f.url}?download=1`} className="rounded-md border border-border bg-surface px-4 py-2.5 text-sm hover:border-subtle">
+            <a key={f.pathname} href={`${f.url}?download=1`} className={buttonClass("secondary", "md")}>
+              <FileText className="size-4" aria-hidden="true" />
               {f.filename}
             </a>
           ))}
       </div>
-
-      {summary && <SummaryTable summary={summary} />}
-
-      {assumptions && (
-        <div>
-          <h3 className="font-semibold">Assumptions</h3>
-          <p className="mt-1 text-sm text-muted">What we had to guess while modelling — check these before relying on the model.</p>
-          <pre className="mt-3 rounded-lg border border-border bg-surface p-4 font-sans text-sm whitespace-pre-wrap">{assumptions}</pre>
-        </div>
+      {summary && (
+        <section className="space-y-4">
+          <h3 className="text-lg font-semibold">What&apos;s in the model</h3>
+          <StatTiles summary={summary} />
+          <SummaryTable summary={summary} />
+        </section>
       )}
-    </div>
-  );
-}
-
-function SummaryTable({ summary }: { summary: ModelSummary }) {
-  const classes = Object.entries(summary.counts).sort((a, b) => b[1] - a[1]);
-  return (
-    <div>
-      <h3 className="font-semibold">What&apos;s in the model</h3>
-      <p className="mt-1 text-sm text-muted">
-        {summary.schema} · {summary.storeys.length} storey{summary.storeys.length === 1 ? "" : "s"}
-        {summary.floorAreaM2 ? ` · ${Math.round(summary.floorAreaM2)} m² floor area` : ""}
-      </p>
-      <div className="mt-3 overflow-x-auto rounded-lg border border-border bg-surface">
-        <table className="w-full text-left text-sm">
-          <thead className="border-b border-border text-xs text-muted">
-            <tr>
-              <th className="px-3 py-2 font-medium">Element</th>
-              <th className="px-3 py-2 text-right font-medium">Total</th>
-              {summary.storeys.map((s) => (
-                <th key={s.name} className="px-3 py-2 text-right font-medium whitespace-nowrap">
-                  {s.name}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-border font-mono text-xs">
-            {classes.map(([ifcClass, total]) => (
-              <tr key={ifcClass}>
-                <td className="px-3 py-2">{ifcClass}</td>
-                <td className="px-3 py-2 text-right">{total}</td>
-                {summary.storeys.map((s) => (
-                  <td key={s.name} className="px-3 py-2 text-right text-muted">
-                    {s.counts[ifcClass] ?? "–"}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      {summary.warnings.length > 0 && (
-        <ul className="mt-3 space-y-1 text-xs text-amber-700 dark:text-amber-300">
-          {summary.warnings.map((w) => (
-            <li key={w}>⚠ {w}</li>
-          ))}
-        </ul>
+      {assumptions && (
+        <section className="space-y-3">
+          <div>
+            <h3 className="text-lg font-semibold">Assumptions</h3>
+            <p className="text-sm text-muted">What had to be guessed while modelling — check these before relying on the model.</p>
+          </div>
+          <Assumptions markdown={assumptions} />
+        </section>
       )}
     </div>
   );

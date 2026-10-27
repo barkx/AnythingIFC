@@ -6,11 +6,9 @@ export const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hello@ifc
 
 export const NAV_LINKS = [
   { href: "/#how-it-works", label: "How it works" },
-  { href: "/#inputs", label: "Inputs" },
-  { href: "/#use-cases", label: "Use cases" },
+  { href: "/#reference-projects", label: "Reference projects" },
   { href: "/#faq", label: "FAQ" },
-  { href: "/#start", label: "Projects" },
-] as const;
+];
 
 // Placeholders until the legal entity is decided (PLAN.md §15).
 export const LEGAL = {

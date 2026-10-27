@@ -1,6 +1,7 @@
 "use client";
 
 import { MAX_FILES_PER_PROJECT } from "@ifcwise/shared";
+import { buttonClass } from "@ifcwise/ui";
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { FilePicker } from "@/components/file-picker";
@@ -70,54 +71,80 @@ export function NewProjectForm() {
 
   const busy = phase.kind === "working";
   return (
-    <form onSubmit={onSubmit} className="grid gap-5 rounded-xl border border-border bg-surface p-5 sm:grid-cols-2 sm:p-6">
-      <ProjectFields />
-
-      <div className="sm:col-span-2">
-        <p className="mb-1.5 text-sm font-medium">Files</p>
-        <FilePicker files={files} onChange={setFiles} maxFiles={MAX_FILES_PER_PROJECT} progress={progress} disabled={busy} />
-      </div>
-
-      <Field label="Display name" hint="(shown publicly)">
-        <input name="authorName" required minLength={2} maxLength={60} autoComplete="nickname" className={inputClass} />
-      </Field>
-      <Field label="Email" hint="(private — only to tell you when it's ready)">
-        <input name="email" type="email" required maxLength={200} autoComplete="email" className={inputClass} />
-      </Field>
-
-      {/* Honeypot — hidden from people, tempting for bots */}
-      <div aria-hidden="true" className="absolute -left-[9999px] h-0 overflow-hidden">
-        <label>
-          Website
-          <input name="website" tabIndex={-1} autoComplete="off" />
-        </label>
-      </div>
-
-      <div className="space-y-3 text-sm text-muted sm:col-span-2">
-        <label className="flex items-start gap-3">
-          <input name="consentRights" type="checkbox" required className="mt-0.5 size-4 accent-[var(--accent)]" />
-          <span>I have the right to share these files and to have a model made from them.</span>
-        </label>
-        <label className="flex items-start gap-3">
-          <input name="consentPublic" type="checkbox" required className="mt-0.5 size-4 accent-[var(--accent)]" />
-          <span>
-            I understand this project — description, files and model — will be <strong className="text-foreground">public</strong>.
-            No confidential drawings or personal details.
-          </span>
-        </label>
-      </div>
-
-      {error && (
-        <div className="sm:col-span-2">
-          <ErrorText>{error}</ErrorText>
+    <form onSubmit={onSubmit} className="space-y-6">
+      <Step n={1} title="About the building" description="A title and a short description. Mention known dimensions, heights and anything unclear in the drawings.">
+        <div className="grid gap-5 sm:grid-cols-2">
+          <ProjectFields />
         </div>
-      )}
-      <div className="flex items-center gap-4 sm:col-span-2">
-        <Button type="submit" disabled={busy}>
-          {busy ? phase.step : "Create project"}
+      </Step>
+
+      <Step n={2} title="Drawings and files" description="DWG/DXF, PDF plans, images or sketches. Optional if the description says enough.">
+        <FilePicker files={files} onChange={setFiles} maxFiles={MAX_FILES_PER_PROJECT} progress={progress} disabled={busy} />
+      </Step>
+
+      <Step n={3} title="About you" description="Your display name is shown on the project. Your email stays private.">
+        <div className="grid gap-5 sm:grid-cols-2">
+          <Field label="Display name">
+            <input name="authorName" required minLength={2} maxLength={60} autoComplete="nickname" placeholder="e.g. Studio Nord" className={inputClass} />
+          </Field>
+          <Field label="Email">
+            <input name="email" type="email" required maxLength={200} autoComplete="email" placeholder="you@example.com" className={inputClass} />
+          </Field>
+        </div>
+
+        {/* Honeypot — hidden from people, tempting for bots */}
+        <div aria-hidden="true" className="absolute -left-[9999px] h-0 overflow-hidden">
+          <label>
+            Website
+            <input name="website" tabIndex={-1} autoComplete="off" />
+          </label>
+        </div>
+
+        <div className="mt-6 space-y-3 rounded-xl bg-surface p-4 text-sm text-muted">
+          <label className="flex items-start gap-3">
+            <input name="consentRights" type="checkbox" required className="mt-0.5 size-4 shrink-0 accent-[var(--accent)]" />
+            <span>I have the right to share these files and to have a model made from them.</span>
+          </label>
+          <label className="flex items-start gap-3">
+            <input name="consentPublic" type="checkbox" required className="mt-0.5 size-4 shrink-0 accent-[var(--accent)]" />
+            <span>
+              I understand this project — description, files and model — will be <strong className="text-foreground">public</strong>.
+              No confidential drawings or personal details.
+            </span>
+          </label>
+        </div>
+      </Step>
+
+      {error && <ErrorText>{error}</ErrorText>}
+      <div className="flex flex-wrap items-center gap-4">
+        <Button type="submit" disabled={busy} className="h-12 px-6 text-[15px]">
+          {busy ? (
+            <>
+              <span className="size-4 animate-spin rounded-full border-2 border-current border-t-transparent" aria-hidden="true" />
+              {phase.step}
+            </>
+          ) : (
+            "Create project"
+          )}
         </Button>
+        <p className="text-xs text-muted">Free during early access · usually 24–48 h</p>
       </div>
     </form>
+  );
+}
+
+function Step({ n, title, description, children }: { n: number; title: string; description: string; children: React.ReactNode }) {
+  return (
+    <section className="rounded-2xl border border-border bg-background p-5 shadow-soft sm:p-7">
+      <div className="mb-5 flex gap-4">
+        <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-foreground text-sm font-semibold text-background">{n}</span>
+        <div>
+          <h2 className="font-semibold">{title}</h2>
+          <p className="mt-0.5 text-sm text-muted">{description}</p>
+        </div>
+      </div>
+      {children}
+    </section>
   );
 }
 
@@ -126,7 +153,7 @@ function CreatedNotice({ projectId, manageToken, uploadFailed }: { projectId: st
   const projectUrl = `${origin}/p/${projectId}`;
   const manageUrl = `${origin}/p/${projectId}/manage?t=${manageToken}`;
   return (
-    <div role="status" className="space-y-5 rounded-xl border border-accent/40 bg-accent-soft/30 p-6">
+    <div role="status" className="space-y-5 rounded-2xl border border-accent/40 bg-background p-6 shadow-float sm:p-8">
       {uploadFailed ? (
         <div>
           <p className="font-semibold">Your project was saved as a draft, but the upload didn&apos;t finish.</p>
@@ -143,10 +170,10 @@ function CreatedNotice({ projectId, manageToken, uploadFailed }: { projectId: st
       <CopyRow label="Project page" value={projectUrl} />
       <CopyRow label="Your private manage link — save it now, it's shown only once" value={manageUrl} />
       <div className="flex flex-wrap gap-3">
-        <Link href={`/p/${projectId}`} className="rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground">
+        <Link href={`/p/${projectId}`} className={buttonClass("accent", "md")}>
           View project
         </Link>
-        <Link href={`/p/${projectId}/manage?t=${manageToken}`} className="rounded-md border border-border bg-surface px-5 py-2.5 text-sm font-medium">
+        <Link href={`/p/${projectId}/manage?t=${manageToken}`} className={buttonClass("secondary", "md")}>
           Manage project
         </Link>
       </div>

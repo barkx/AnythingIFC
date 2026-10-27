@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34.4 24.4" font-family="ui-sans-serif, system-ui, sans-serif">
+<title>Warehouse with office — Ground Floor plan</title>
+<defs><pattern id="g" width="1" height="1" patternUnits="userSpaceOnUse"><path d="M1 0H0V1" fill="none" stroke="#e7e5e4" stroke-width="0.02"/></pattern></defs>
+<rect width="34.4" height="24.4" fill="#fff"/>
+<rect width="34.4" height="24.4" fill="url(#g)"/>
+<polygon points="2.5,21.9 6.64,21.9 6.64,15.26 2.5,15.26" fill="#0f766e" fill-opacity="0.05"/>
+<text x="4.57" y="18.58" text-anchor="middle" font-size="0.769" fill="#1c1917" font-weight="600">Office</text>
+<text x="4.57" y="19.58" text-anchor="middle" font-size="0.654" fill="#78716c">27.5 m²</text>
+<polygon points="6.76,21.9 11.14,21.9 11.14,15.26 6.76,15.26" fill="#0f766e" fill-opacity="0.05"/>
+<text x="8.95" y="18.58" text-anchor="middle" font-size="0.769" fill="#1c1917" font-weight="600">Staff room</text>
+<text x="8.95" y="19.58" text-anchor="middle" font-size="0.654" fill="#78716c">29.1 m²</text>
+<polygon points="11.26,21.9 31.9,21.9 31.9,2.5 2.5,2.5 2.5,15.14 11.26,15.14" fill="#0f766e" fill-opacity="0.05"/>
+<text x="18.396" y="11.468" text-anchor="middle" font-size="0.769" fill="#1c1917" font-weight="600">Storage hall</text>
+<text x="18.396" y="12.468" text-anchor="middle" font-size="0.654" fill="#78716c">511.1 m²</text>
+<polygon points="2.2,21.9 3.85,21.9 3.85,22.2 2.2,22.2" fill="#1c1917"/>
+<polygon points="5.45,21.9 6.85,21.9 6.85,22.2 5.45,22.2" fill="#1c1917"/>
+<polygon points="8.45,21.9 9.35,21.9 9.35,22.2 8.45,22.2" fill="#1c1917"/>
+<polygon points="10.35,21.9 15.35,21.9 15.35,22.2 10.35,22.2" fill="#1c1917"/>
+<polygon points="19.35,21.9 22.35,21.9 22.35,22.2 19.35,22.2" fill="#1c1917"/>
+<polygon points="26.35,21.9 32.2,21.9 32.2,22.2 26.35,22.2" fill="#1c1917"/>
+<line x1="3.85" y1="22.2" x2="5.45" y2="22.2" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="3.85" y1="21.9" x2="5.45" y2="21.9" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="3.85" y1="22.05" x2="5.45" y2="22.05" stroke="#0f766e" stroke-width="0.05"/>
+<line x1="6.85" y1="22.2" x2="8.45" y2="22.2" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="6.85" y1="21.9" x2="8.45" y2="21.9" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="6.85" y1="22.05" x2="8.45" y2="22.05" stroke="#0f766e" stroke-width="0.05"/>
+<line x1="9.35" y1="22.05" x2="9.35" y2="21.05" stroke="#1c1917" stroke-width="0.04"/>
+<path d="M9.35 21.05 A1 1 0 0 1 10.35 22.05" fill="none" stroke="#78716c" stroke-width="0.025" stroke-dasharray="0.12 0.08"/>
+<line x1="15.35" y1="21.5" x2="19.35" y2="21.5" stroke="#78716c" stroke-width="0.04" stroke-dasharray="0.25 0.15"/>
+<line x1="22.35" y1="21.5" x2="26.35" y2="21.5" stroke="#78716c" stroke-width="0.04" stroke-dasharray="0.25 0.15"/>
+<polygon points="31.9,22.2 31.9,20.05 32.2,20.05 32.2,22.2" fill="#1c1917"/>
+<polygon points="31.9,17.05 31.9,15.55 32.2,15.55 32.2,17.05" fill="#1c1917"/>
+<polygon points="31.9,12.55 31.9,11.05 32.2,11.05 32.2,12.55" fill="#1c1917"/>
+<polygon points="31.9,8.05 31.9,6.55 32.2,6.55 32.2,8.05" fill="#1c1917"/>
+<polygon points="31.9,5.55 31.9,2.2 32.2,2.2 32.2,5.55" fill="#1c1917"/>
+<line x1="32.05" y1="6.55" x2="31.05" y2="6.55" stroke="#1c1917" stroke-width="0.04"/>
+<path d="M31.05 6.55 A1 1 0 0 1 32.05 5.55" fill="none" stroke="#78716c" stroke-width="0.025" stroke-dasharray="0.12 0.08"/>
+<line x1="32.2" y1="20.05" x2="32.2" y2="17.05" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="31.9" y1="20.05" x2="31.9" y2="17.05" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="32.05" y1="20.05" x2="32.05" y2="17.05" stroke="#0f766e" stroke-width="0.05"/>
+<line x1="32.2" y1="15.55" x2="32.2" y2="12.55" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="31.9" y1="15.55" x2="31.9" y2="12.55" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="32.05" y1="15.55" x2="32.05" y2="12.55" stroke="#0f766e" stroke-width="0.05"/>
+<line x1="32.2" y1="11.05" x2="32.2" y2="8.05" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="31.9" y1="11.05" x2="31.9" y2="8.05" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="32.05" y1="11.05" x2="32.05" y2="8.05" stroke="#0f766e" stroke-width="0.05"/>
+<polygon points="32.2,2.5 30.05,2.5 30.05,2.2 32.2,2.2" fill="#1c1917"/>
+<polygon points="27.05,2.5 25.55,2.5 25.55,2.2 27.05,2.2" fill="#1c1917"/>
+<polygon points="22.55,2.5 21.05,2.5 21.05,2.2 22.55,2.2" fill="#1c1917"/>
+<polygon points="18.05,2.5 16.55,2.5 16.55,2.2 18.05,2.2" fill="#1c1917"/>
+<polygon points="13.55,2.5 12.05,2.5 12.05,2.2 13.55,2.2" fill="#1c1917"/>
+<polygon points="9.05,2.5 7.55,2.5 7.55,2.2 9.05,2.2" fill="#1c1917"/>
+<polygon points="4.55,2.5 2.2,2.5 2.2,2.2 4.55,2.2" fill="#1c1917"/>
+<line x1="30.05" y1="2.2" x2="27.05" y2="2.2" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="30.05" y1="2.5" x2="27.05" y2="2.5" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="30.05" y1="2.35" x2="27.05" y2="2.35" stroke="#0f766e" stroke-width="0.05"/>
+<line x1="25.55" y1="2.2" x2="22.55" y2="2.2" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="25.55" y1="2.5" x2="22.55" y2="2.5" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="25.55" y1="2.35" x2="22.55" y2="2.35" stroke="#0f766e" stroke-width="0.05"/>
+<line x1="21.05" y1="2.2" x2="18.05" y2="2.2" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="21.05" y1="2.5" x2="18.05" y2="2.5" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="21.05" y1="2.35" x2="18.05" y2="2.35" stroke="#0f766e" stroke-width="0.05"/>
+<line x1="16.55" y1="2.2" x2="13.55" y2="2.2" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="16.55" y1="2.5" x2="13.55" y2="2.5" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="16.55" y1="2.35" x2="13.55" y2="2.35" stroke="#0f766e" stroke-width="0.05"/>
+<line x1="12.05" y1="2.2" x2="9.05" y2="2.2" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="12.05" y1="2.5" x2="9.05" y2="2.5" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="12.05" y1="2.35" x2="9.05" y2="2.35" stroke="#0f766e" stroke-width="0.05"/>
+<line x1="7.55" y1="2.2" x2="4.55" y2="2.2" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="7.55" y1="2.5" x2="4.55" y2="2.5" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="7.55" y1="2.35" x2="4.55" y2="2.35" stroke="#0f766e" stroke-width="0.05"/>
+<polygon points="2.5,2.2 2.5,4.35 2.2,4.35 2.2,2.2" fill="#1c1917"/>
+<polygon points="2.5,7.35 2.5,8.85 2.2,8.85 2.2,7.35" fill="#1c1917"/>
+<polygon points="2.5,11.85 2.5,17.85 2.2,17.85 2.2,11.85" fill="#1c1917"/>
+<polygon points="2.5,19.45 2.5,22.2 2.2,22.2 2.2,19.45" fill="#1c1917"/>
+<line x1="2.2" y1="4.35" x2="2.2" y2="7.35" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="2.5" y1="4.35" x2="2.5" y2="7.35" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="2.35" y1="4.35" x2="2.35" y2="7.35" stroke="#0f766e" stroke-width="0.05"/>
+<line x1="2.2" y1="8.85" x2="2.2" y2="11.85" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="2.5" y1="8.85" x2="2.5" y2="11.85" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="2.35" y1="8.85" x2="2.35" y2="11.85" stroke="#0f766e" stroke-width="0.05"/>
+<line x1="2.2" y1="17.85" x2="2.2" y2="19.45" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="2.5" y1="17.85" x2="2.5" y2="19.45" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="2.35" y1="17.85" x2="2.35" y2="19.45" stroke="#0f766e" stroke-width="0.05"/>
+<polygon points="11.14,21.96 11.14,17.1 11.26,17.1 11.26,21.96" fill="#1c1917"/>
+<polygon points="11.14,16.2 11.14,15.14 11.26,15.14 11.26,16.2" fill="#1c1917"/>
+<line x1="11.2" y1="17.1" x2="10.3" y2="17.1" stroke="#1c1917" stroke-width="0.04"/>
+<path d="M10.3 17.1 A0.9 0.9 0 0 1 11.2 16.2" fill="none" stroke="#78716c" stroke-width="0.025" stroke-dasharray="0.12 0.08"/>
+<polygon points="11.26,15.26 9.8,15.26 9.8,15.14 11.26,15.14" fill="#1c1917"/>
+<polygon points="8.9,15.26 7.2,15.26 7.2,15.14 8.9,15.14" fill="#1c1917"/>
+<polygon points="5.2,15.26 2.44,15.26 2.44,15.14 5.2,15.14" fill="#1c1917"/>
+<line x1="9.8" y1="15.2" x2="9.8" y2="16.1" stroke="#1c1917" stroke-width="0.04"/>
+<path d="M9.8 16.1 A0.9 0.9 0 0 1 8.9 15.2" fill="none" stroke="#78716c" stroke-width="0.025" stroke-dasharray="0.12 0.08"/>
+<line x1="7.2" y1="15.14" x2="5.2" y2="15.14" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="7.2" y1="15.26" x2="5.2" y2="15.26" stroke="#1c1917" stroke-width="0.03"/>
+<line x1="7.2" y1="15.2" x2="5.2" y2="15.2" stroke="#0f766e" stroke-width="0.05"/>
+<polygon points="6.64,21.96 6.64,17.3 6.76,17.3 6.76,21.96" fill="#1c1917"/>
+<polygon points="6.64,16.5 6.64,15.2 6.76,15.2 6.76,16.5" fill="#1c1917"/>
+<line x1="6.7" y1="17.3" x2="5.9" y2="17.3" stroke="#1c1917" stroke-width="0.04"/>
+<path d="M5.9 17.3 A0.8 0.8 0 0 1 6.7 16.5" fill="none" stroke="#78716c" stroke-width="0.025" stroke-dasharray="0.12 0.08"/>
+<g stroke="#78716c" stroke-width="0.03" fill="#78716c" font-size="0.692">
+<line x1="2.2" y1="23.3" x2="32.2" y2="23.3"/>
+<line x1="2.2" y1="23.05" x2="2.2" y2="23.55"/>
+<line x1="32.2" y1="23.05" x2="32.2" y2="23.55"/>
+<text x="17.2" y="23.1" text-anchor="middle" stroke="none">30.00</text>
+<line x1="1.1" y1="22.2" x2="1.1" y2="2.2"/>
+<line x1="0.85" y1="22.2" x2="1.35" y2="22.2"/>
+<line x1="0.85" y1="2.2" x2="1.35" y2="2.2"/>
+<text x="0.85" y="12.2" text-anchor="middle" stroke="none" transform="rotate(-90 0.85 12.2)">20.00</text>
+</g>
+<text x="2.2" y="1.21" font-size="0.769" fill="#78716c" letter-spacing="0.04">GROUND FLOOR · 1:100</text>
+</svg>

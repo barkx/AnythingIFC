@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function ManagePage({ params, searchParams }: PageProps<"/p/[id]/manage">) {
   return (
-    <main className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6">
+    <main className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
       <Suspense fallback={<p className="text-muted">Loading…</p>}>
         <ManageContent params={params} searchParams={searchParams} />
       </Suspense>

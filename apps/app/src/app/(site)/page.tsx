@@ -1,7 +1,10 @@
-import { BUILDING_TYPES, BUILDING_TYPE_LABELS, type BuildingType, type PublicProject } from "@ifcwise/shared";
+import { BUILDING_TYPES, BUILDING_TYPE_LABELS, SAMPLE_PROJECTS, type BuildingType, type PublicProject } from "@ifcwise/shared";
+import { ButtonLink, Pill, cx } from "@ifcwise/ui";
+import { Plus, Sparkles, Upload } from "lucide-react";
 import Link from "next/link";
-import { Suspense } from "react";
-import { ProjectCard } from "@/components/project-card";
+import { Suspense, type ReactNode } from "react";
+import { ProjectCard, SampleCard } from "@/components/project-card";
+import { PageHeader } from "@/components/ui";
 import { listPublishedProjects, thumbnailUrl } from "@/lib/project-list";
 
 const STATUS_FILTERS = {
@@ -13,23 +16,60 @@ type StatusFilter = keyof typeof STATUS_FILTERS;
 
 export default function GalleryPage({ searchParams }: PageProps<"/">) {
   return (
-    <main className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="font-mono text-xs tracking-widest text-accent uppercase">Public projects</p>
-          <h1 className="mt-2 text-3xl font-semibold tracking-tight">From drawings to IFC</h1>
-          <p className="mt-2 max-w-2xl text-muted">
-            Every project here started as drawings, sketches or a description and was modelled as IFC.
-          </p>
+    <main>
+      <PageHeader
+        eyebrow={
+          <Pill>
+            <Sparkles className="size-3.5 text-accent" aria-hidden="true" />
+            Public gallery · early access
+          </Pill>
+        }
+        title={
+          <>
+            Drawings in, <span className="text-gradient">IFC models</span> out.
+          </>
+        }
+        description="Every project here started as CAD drawings, PDF plans, sketches or a description — and came back as an IFC model you can open in any BIM tool."
+        actions={
+          <ButtonLink href="/new" variant="accent" size="lg">
+            <Upload className="size-4" aria-hidden="true" />
+            Start a project
+          </ButtonLink>
+        }
+      />
+
+      <section id="reference-projects" className="mx-auto w-full max-w-6xl scroll-mt-20 px-4 py-14 sm:px-6">
+        <SectionTitle
+          title="Reference projects"
+          description="Built with the same pipeline as every customer project. Open one to explore the model in 3D, check the element summary or download the IFC."
+        />
+        <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {SAMPLE_PROJECTS.map((sample) => (
+            <li key={sample.slug} className="flex">
+              <SampleCard sample={sample} />
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="border-t border-border bg-surface">
+        <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6">
+          <SectionTitle title="Community projects" description="Reviewed projects from people using IFCWise." />
+          <Suspense fallback={<p className="mt-8 text-muted">Loading projects…</p>}>
+            <Gallery searchParams={searchParams} />
+          </Suspense>
         </div>
-        <Link href="/new" className="rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground">
-          Start a project
-        </Link>
-      </div>
-      <Suspense fallback={<p className="mt-10 text-muted">Loading projects…</p>}>
-        <Gallery searchParams={searchParams} />
-      </Suspense>
+      </section>
     </main>
+  );
+}
+
+function SectionTitle({ title, description }: { title: string; description: string }) {
+  return (
+    <div className="max-w-2xl">
+      <h2 className="text-2xl font-semibold tracking-tight">{title}</h2>
+      <p className="mt-2 text-muted">{description}</p>
+    </div>
   );
 }
 
@@ -51,15 +91,30 @@ async function Gallery({ searchParams }: { searchParams: PageProps<"/">["searchP
     return query ? `/?${query}` : "/";
   };
 
+  if (all.length === 0) {
+    return (
+      <div className="mt-8 flex flex-col items-center gap-3 rounded-2xl border border-dashed border-border bg-background px-6 py-14 text-center">
+        <span className="flex size-12 items-center justify-center rounded-xl bg-accent-soft text-accent">
+          <Plus className="size-6" aria-hidden="true" />
+        </span>
+        <p className="font-semibold">Be the first community project</p>
+        <p className="max-w-sm text-sm text-muted">Upload a drawing, sketch or description. Once reviewed, it appears here with its IFC model.</p>
+        <ButtonLink href="/new" variant="primary" className="mt-2">
+          Start a project
+        </ButtonLink>
+      </div>
+    );
+  }
+
   return (
     <>
-      <nav aria-label="Filters" className="mt-8 flex flex-wrap items-center gap-2 text-sm">
+      <nav aria-label="Filters" className="mt-6 flex flex-wrap items-center gap-2 text-sm">
         {(Object.keys(STATUS_FILTERS) as StatusFilter[]).map((key) => (
           <Chip key={key} href={href({ status: key })} active={status === key}>
             {STATUS_FILTERS[key].label}
           </Chip>
         ))}
-        <span className="mx-2 h-5 w-px bg-border" aria-hidden="true" />
+        <span className="mx-1 h-5 w-px bg-border" aria-hidden="true" />
         <Chip href={href({ type: undefined })} active={!type}>
           Any type
         </Chip>
@@ -69,9 +124,8 @@ async function Gallery({ searchParams }: { searchParams: PageProps<"/">["searchP
           </Chip>
         ))}
       </nav>
-
       {projects.length ? (
-        <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project) => (
             <li key={project.id} className="flex">
               <ProjectCard project={project} thumbnail={thumbnailUrl(project)} />
@@ -79,31 +133,26 @@ async function Gallery({ searchParams }: { searchParams: PageProps<"/">["searchP
           ))}
         </ul>
       ) : (
-        <div className="mt-8 rounded-xl border border-dashed border-border p-12 text-center">
-          <p className="font-medium">{all.length ? "No projects match these filters." : "No public projects yet."}</p>
-          <p className="mt-2 text-sm text-muted">
-            {all.length ? (
-              <Link href="/" className="text-accent hover:underline">
-                Clear filters
-              </Link>
-            ) : (
-              "Be the first — start a project and it will appear here once reviewed."
-            )}
-          </p>
-        </div>
+        <p className="mt-8 text-sm text-muted">
+          No projects match these filters.{" "}
+          <Link href="/" className="text-accent hover:underline">
+            Clear filters
+          </Link>
+        </p>
       )}
     </>
   );
 }
 
-function Chip({ href, active, children }: { href: string; active: boolean; children: React.ReactNode }) {
+function Chip({ href, active, children }: { href: string; active: boolean; children: ReactNode }) {
   return (
     <Link
       href={href}
       aria-current={active ? "page" : undefined}
-      className={`rounded-full border px-3 py-1 ${
-        active ? "border-foreground bg-foreground text-background" : "border-border bg-surface text-muted hover:text-foreground"
-      }`}
+      className={cx(
+        "rounded-full px-3 py-1 font-medium ring-1 ring-inset transition",
+        active ? "bg-foreground text-background ring-foreground" : "bg-background text-muted ring-border hover:text-foreground",
+      )}
     >
       {children}
     </Link>

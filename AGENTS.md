@@ -23,6 +23,7 @@ Read before larger changes:
 | `apps/www` | Landing page (Next.js, deployed to Vercel) | 3000 |
 | `apps/app` | Public projects + admin (Next.js, deployed to Vercel) | 3001 |
 | `packages/shared` | Shared TypeScript constants and types (`@ifcwise/shared`) | — |
+| `packages/ui` | Shared design system: theme tokens (`theme.css`), logo, buttons, header, footer (`@ifcwise/ui`) | — |
 | `tools/ifc-tools` | Python CLI run on the owner's PC: `pull`, `prepare`, `validate` (uv project) | — |
 | `docs/` | Decisions, SOPs, deployment notes | — |
 
@@ -55,6 +56,10 @@ Before saying a task is done: `npm run typecheck`, `npm run lint` and `npm run b
   `node_modules/next/dist/docs/` at the repo root) before using an API. Do that. Cache Components are on.
 - **TypeScript strict**, Next.js App Router, React Server Components by default; `"use client"` only where needed.
 - **Tailwind CSS** for styling. No other CSS frameworks or UI kits without a decision in `docs/DECISIONS.md`.
+- **Design system:** colours and utilities live in `packages/ui/src/theme.css` (both apps import it); reuse
+  `@ifcwise/ui` components (`ButtonLink`, `SectionHeader`, `Pill`, …) and `lucide-react` icons before adding new styles.
+- **Reference projects:** defined in `tools/ifc-tools/samples/specs.py`; `npm run samples` regenerates
+  `apps/app/public/samples/*` and `packages/shared/src/samples.ts` — never edit those outputs by hand.
 - **npm workspaces** (not pnpm/yarn). Add deps to the workspace that uses them: `npm i <pkg> -w apps/app`.
 - **No database.** Each project is one `project.json` in Vercel Blob. All reads/writes go through
   `apps/app/src/lib/projects.ts`; Blob paths come only from `apps/app/src/lib/blob.ts` (project IDs +

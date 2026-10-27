@@ -1,0 +1,43 @@
+{
+  "schema": "IFC4",
+  "counts": {
+    "IfcWindow": 14,
+    "IfcWall": 13,
+    "IfcDoor": 8,
+    "IfcSpace": 7,
+    "IfcSlab": 3
+  },
+  "storeys": [
+    {
+      "name": "Ground Floor",
+      "elevation": 0.0,
+      "counts": {
+        "IfcDoor": 4,
+        "IfcSlab": 1,
+        "IfcWall": 6,
+        "IfcWindow": 7,
+        "IfcSpace": 3
+      }
+    },
+    {
+      "name": "First Floor",
+      "elevation": 3.0,
+      "counts": {
+        "IfcDoor": 4,
+        "IfcSlab": 1,
+        "IfcWall": 7,
+        "IfcWindow": 7,
+        "IfcSpace": 4
+      }
+    },
+    {
+      "name": "Roof",
+      "elevation": 6.0,
+      "counts": {
+        "IfcSlab": 1
+      }
+    }
+  ],
+  "floorAreaM2": 171.0,
+  "warnings": []
+}

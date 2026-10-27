@@ -1,0 +1,32 @@
+{
+  "schema": "IFC4",
+  "counts": {
+    "IfcWindow": 15,
+    "IfcDoor": 7,
+    "IfcWall": 7,
+    "IfcSpace": 3,
+    "IfcSlab": 2
+  },
+  "storeys": [
+    {
+      "name": "Ground Floor",
+      "elevation": 0.0,
+      "counts": {
+        "IfcDoor": 7,
+        "IfcSlab": 1,
+        "IfcWall": 7,
+        "IfcWindow": 15,
+        "IfcSpace": 3
+      }
+    },
+    {
+      "name": "Roof",
+      "elevation": 7.0,
+      "counts": {
+        "IfcSlab": 1
+      }
+    }
+  ],
+  "floorAreaM2": 567.7,
+  "warnings": []
+}

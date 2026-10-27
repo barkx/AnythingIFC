@@ -1,0 +1,54 @@
+{
+  "schema": "IFC4",
+  "counts": {
+    "IfcWindow": 65,
+    "IfcWall": 24,
+    "IfcSpace": 9,
+    "IfcDoor": 4,
+    "IfcSlab": 4
+  },
+  "storeys": [
+    {
+      "name": "Ground Floor",
+      "elevation": 0.0,
+      "counts": {
+        "IfcDoor": 2,
+        "IfcSlab": 1,
+        "IfcWall": 8,
+        "IfcWindow": 21,
+        "IfcSpace": 3
+      }
+    },
+    {
+      "name": "First Floor",
+      "elevation": 3.5,
+      "counts": {
+        "IfcDoor": 1,
+        "IfcSlab": 1,
+        "IfcWall": 8,
+        "IfcWindow": 22,
+        "IfcSpace": 3
+      }
+    },
+    {
+      "name": "Second Floor",
+      "elevation": 7.0,
+      "counts": {
+        "IfcDoor": 1,
+        "IfcSlab": 1,
+        "IfcWall": 8,
+        "IfcWindow": 22,
+        "IfcSpace": 3
+      }
+    },
+    {
+      "name": "Roof",
+      "elevation": 10.5,
+      "counts": {
+        "IfcSlab": 1
+      }
+    }
+  ],
+  "floorAreaM2": 560.3,
+  "warnings": []
+}

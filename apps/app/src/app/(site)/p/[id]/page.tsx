@@ -25,8 +25,8 @@ export async function generateMetadata({ params }: PageProps<"/p/[id]">): Promis
 
 export default function ProjectPage({ params }: PageProps<"/p/[id]">) {
   return (
-    <main className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6">
-      <Suspense fallback={<p className="text-muted">Loading project…</p>}>
+    <main>
+      <Suspense fallback={<p className="mx-auto w-full max-w-6xl px-4 py-16 text-muted sm:px-6">Loading project…</p>}>
         <ProjectContent params={params} />
       </Suspense>
     </main>
@@ -40,15 +40,17 @@ async function ProjectContent({ params }: { params: PageProps<"/p/[id]">["params
   if (!loaded) notFound();
   const subject = encodeURIComponent(`Report project ${id}`);
   return (
-    <>
-      <ProjectView project={toPublic(loaded.project)} />
-      <p className="mt-12 border-t border-border pt-6 text-xs text-muted">
-        Is this your drawing, or does it show something it shouldn&apos;t?{" "}
-        <a href={`mailto:${CONTACT_EMAIL}?subject=${subject}`} className="underline hover:text-foreground">
-          Report this project
-        </a>
-        .
-      </p>
-    </>
+    <ProjectView
+      project={toPublic(loaded.project)}
+      footer={
+        <p className="border-t border-border pt-6 text-xs text-muted">
+          Is this your drawing, or does it show something it shouldn&apos;t?{" "}
+          <a href={`mailto:${CONTACT_EMAIL}?subject=${subject}`} className="underline hover:text-foreground">
+            Report this project
+          </a>
+          .
+        </p>
+      }
+    />
   );
 }
