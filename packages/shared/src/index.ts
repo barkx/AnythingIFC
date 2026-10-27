@@ -1,16 +1,21 @@
 // Constants shared by apps/www and apps/app. See PLAN.md §5–6.
 
-export const JOB_STATUSES = [
+export const PROJECT_STATUSES = [
   "submitted",
-  "processing",
-  "review",
+  "in_progress",
   "needs_info",
   "completed",
-  "failed",
-  "cancelled",
-  "expired",
+  "rejected",
 ] as const;
-export type JobStatus = (typeof JOB_STATUSES)[number];
+export type ProjectStatus = (typeof PROJECT_STATUSES)[number];
+
+export const PROJECT_STATUS_LABELS: Record<ProjectStatus, string> = {
+  submitted: "Submitted",
+  in_progress: "In progress",
+  needs_info: "Needs info",
+  completed: "Completed",
+  rejected: "Rejected",
+};
 
 export const USER_TYPES = [
   "architect",
@@ -45,8 +50,8 @@ export const ALLOWED_UPLOAD_EXTENSIONS = [
   ".md",
 ] as const;
 
-// Cloudflare free plan caps a single request at 100 MB.
+export const ALLOWED_OUTPUT_EXTENSIONS = [".ifc", ".json", ".md", ".png"] as const;
+
 export const MAX_FILE_BYTES = 100 * 1024 * 1024;
-export const MAX_FILES_PER_JOB = 20;
-export const MAX_JOBS_PER_DAY = 5;
-export const RETENTION_DAYS = 30;
+export const MAX_FILES_PER_PROJECT = 20;
+export const MAX_PROJECTS_PER_IP_PER_DAY = 3;

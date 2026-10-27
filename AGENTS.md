@@ -6,9 +6,10 @@ This file is read by every coding agent working on this repo (Codex, Claude Code
 ## What this project is
 
 IFCWise turns CAD drawings, PDF plans, images and text into IFC building models.
-Proof of concept: users upload on **app.ifcwise.com**, files land in a folder on the owner's Windows PC,
-the owner converts them by hand (Codex + Revit MCP or Blender + Bonsai), and the IFC is delivered back
-with an in-browser viewer. **ifcwise.com** is the landing page.
+Proof of concept: anyone creates a **public project** on **app.ifcwise.com** (Vercel); files go to Vercel Blob.
+The owner pulls projects to a Windows PC, models them by hand (Codex + Revit MCP or Blender + Bonsai) and
+uploads the IFC through the admin page. Visitors view it in the browser. **ifcwise.com** is the landing page.
+The PC never hosts anything.
 
 Read before larger changes:
 - [PLAN.md](PLAN.md) — architecture, data model, job lifecycle, build order
@@ -20,13 +21,13 @@ Read before larger changes:
 | Path | What | Port |
 |---|---|---|
 | `apps/www` | Landing page (Next.js, deployed to Vercel) | 3000 |
-| `apps/app` | Web app (Next.js, runs on the owner's PC behind Cloudflare Tunnel) | 3001 |
+| `apps/app` | Public projects + admin (Next.js, deployed to Vercel) | 3001 |
 | `packages/shared` | Shared TypeScript constants and types (`@ifcwise/shared`) | — |
-| `tools/ifc-tools` | Python CLI: `prepare`, `validate` (uv project) | — |
+| `tools/ifc-tools` | Python CLI run on the owner's PC: `pull`, `prepare`, `validate` (uv project) | — |
 | `docs/` | Decisions, SOPs, deployment notes | — |
 
-Customer data lives **outside the repo** in `IFCWISE_DATA_DIR` (default `C:\IFCWiseData`).
-Never write job files, databases or uploads inside the repo.
+Project data lives in **Vercel Blob** (`projects/<id>/project.json`, `input/`, `output/`). Local working
+copies live outside the repo in `IFCWISE_DATA_DIR` (default `C:\IFCWiseData`). Never write project files inside the repo.
 
 ## Commands
 
@@ -54,10 +55,11 @@ and for UI changes the page must be checked in a browser.
 - **TypeScript strict**, Next.js App Router, React Server Components by default; `"use client"` only where needed.
 - **Tailwind CSS** for styling. No other CSS frameworks or UI kits without a decision in `docs/DECISIONS.md`.
 - **npm workspaces** (not pnpm/yarn). Add deps to the workspace that uses them: `npm i <pkg> -w apps/app`.
-- **Database:** SQLite via `better-sqlite3` + Drizzle ORM, only in `apps/app/src/db`. Schema changes
-  go through Drizzle migrations — never edit the database by hand.
-- **Files:** all disk access for job data goes through `apps/app/src/lib/storage.ts`. Build paths only
-  from job IDs and sanitised filenames; never from raw user input.
+- **No database.** Each project is one `project.json` in Vercel Blob. All reads/writes go through
+  `apps/app/src/lib/projects.ts`; Blob paths come only from `apps/app/src/lib/blob.ts` (project IDs +
+  sanitised filenames, never raw user input). Browser uploads use `@vercel/blob/client` (direct to Blob).
+- **Public by default, private fields never leak:** `contact.emailEnc` and `manageTokenHash` are stripped
+  by the public serialiser in `projects.ts` before any data reaches a client component or API response.
 - **Shared constants** (job statuses, allowed file types, limits) live in `packages/shared` and are
   imported, never duplicated.
 - **Python:** 3.12 via `uv`, `typer` CLI, type hints, `ruff` formatting. Heavy deps (`ifcopenshell`,
@@ -74,16 +76,17 @@ and for UI changes the page must be checked in a browser.
 3. **Record decisions.** Anything that changes the architecture, stack or a convention → add an entry
    to `docs/DECISIONS.md` and update PLAN.md / this file if affected.
 4. **No secrets in git.** Use `.env.local` (gitignored); keep `.env.example` files up to date with names only.
-5. **No cloud services** (Supabase, Firebase, S3, …) in the PoC unless a decision says otherwise.
-6. **Security basics:** every page and file route checks the session; users only access their own jobs;
-   admin routes check `role === 'admin'` on the server.
+5. **Only Vercel services** (Vercel Blob, optionally Resend and Turnstile) in the PoC; no Supabase/DB
+   unless a decision says otherwise.
+6. **Security basics:** admin pages and `/api/admin/*` check the admin session or bearer token on the server;
+   manage pages check the manage token hash; unpublished projects are `noindex` and excluded from listings.
 7. **Terms of service:** don't build anything that runs ChatGPT/Codex or Revit unattended on customer jobs.
    The PoC keeps a human in the loop (see PLAN.md §10).
 8. Don't commit or push unless the user asks. Commit messages: imperative, short subject, e.g.
-   `app: add invite-code login`.
+   `app: add project create flow`.
 
 ## Conversion work (not app code)
 
-Codex sessions that model buildings run inside a **job folder** in `C:\IFCWiseData\jobs\<id>\`, guided by that
+Codex sessions that model buildings run inside a **job folder** in `C:\IFCWiseData\jobs\<id>\` (created by `ifc-tools pull`), guided by that
 folder's `PROMPT.md` — not inside this repo. The template for `PROMPT.md` lives in
 `tools/ifc-tools/src/ifc_tools/templates/`.

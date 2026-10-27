@@ -3,12 +3,12 @@
 Source of truth for progress. Agents: take the first unchecked task in the current phase,
 tick it when done (`- [x]`), and add a short note after it if useful. Details for each phase are in [PLAN.md](PLAN.md).
 
-**Current phase: 1 — Landing page**
+**Current phase: 2 — Projects on Blob**
 
 ---
 
 ## Phase 0 — Foundations
-- [x] PLAN.md (v2, local-first, no Supabase)
+- [x] PLAN.md (v3: public projects on Vercel Blob, local computation)
 - [x] AGENTS.md, CLAUDE.md, TASKS.md, docs/DECISIONS.md
 - [x] Claude Code config: `.claude/launch.json`, `/next-task` command
 - [ ] `.claude/settings.json` permission allowlist _(needs the user to approve; see docs/claude-settings.example.json)_
@@ -20,80 +20,72 @@ tick it when done (`- [x]`), and add a short note after it if useful. Details fo
 - [x] `npm run build`, `npm run typecheck`, `npm run lint` pass; both apps open in the browser
 - [x] `git init` (branch `main`)
 - [x] First local commit
-- [ ] Create private GitHub repo `ifcwise` and push _(end of session, user decides)_
+- [x] GitHub remote: https://github.com/barkx/AnythingIFC (public) — push at end of session
 
 ## Phase 1 — Landing page (`apps/www`)
-- [ ] Brand basics: wordmark, colour tokens, typography (light + dark)
-- [ ] Hero: "From drawings to IFC" + primary CTA
-- [ ] How it works (Upload → We model → Download IFC)
-- [ ] Supported inputs + what LOD 100–200 contains
-- [ ] Use cases: architects, contractors, homeowners, facility managers
-- [ ] FAQ (what is IFC, turnaround, privacy, retention)
-- [ ] Request-access form → `POST {NEXT_PUBLIC_APP_URL}/api/waitlist`, with `mailto:` fallback when offline
-- [ ] Privacy policy, terms, imprint pages (placeholders for legal entity)
-- [ ] SEO: metadata, Open Graph image, favicon, sitemap, robots
-- [ ] Mobile check at 375 px
+- [x] Brand basics: wordmark, colour tokens, typography (light + dark)
+- [x] Hero: "From drawings to IFC" + primary CTA
+- [x] How it works (Upload → We model → Download IFC)
+- [x] Supported inputs + what LOD 100–200 contains
+- [x] Use cases: architects, contractors, homeowners, facility managers
+- [x] FAQ (what is IFC, turnaround, privacy, retention)
+- [x] ~~Request-access form~~ replaced by "Start a project" / "Browse projects" CTAs (public projects, PLAN v3)
+- [x] Privacy policy, terms, imprint pages (placeholders for legal entity) — drafts, need legal review + company details in `src/lib/site.ts`
+- [x] SEO: metadata, Open Graph image, favicon, sitemap, robots
+- [x] Mobile check at 375 px
 
-## Phase 2 — Auth and invites (`apps/app`)
-- [ ] Data dir bootstrap: create `IFCWISE_DATA_DIR`, `jobs/`, SQLite file with WAL
-- [ ] Drizzle setup + schema: `invites`, `users`, `sessions`, `waitlist` + first migration
-- [ ] Session helpers: create/read/destroy, signed httpOnly cookie
-- [ ] Admin bootstrap from `ADMIN_INVITE_CODE`
-- [ ] Login page: invite code → first-time profile form → session
-- [ ] Route protection (middleware + server checks), logout
-- [ ] `POST /api/waitlist` with CORS for `WWW_URL`, zod validation, rate limit
-- [ ] Admin: waitlist list → "Create invite" (copies code + message to clipboard)
-- [ ] Admin: invites list, revoke
-- [ ] Login rate limiting
+## Phase 2 — Projects on Blob (`apps/app`)
+- [ ] Add `@vercel/blob`, `zod`; Blob store connected locally (`vercel env pull` or `BLOB_READ_WRITE_TOKEN` in `.env.local`)
+- [ ] `packages/shared`: `Project` type, statuses, limits (done partly in Phase 1)
+- [ ] `lib/crypto.ts`: AES-256-GCM email encryption, manage-token generation + SHA-256 hash
+- [ ] `lib/blob.ts`: path helpers, filename sanitising, allowed types/sizes
+- [ ] `lib/projects.ts`: create/read/update/delete `project.json`, public serialiser, cache tags
+- [ ] `/new` form: project fields, display name, email, honeypot, consent checkboxes
+- [ ] `/api/upload` client-upload handler (`handleUpload`) with path/type/size checks; per-file progress in the form
+- [ ] Submit flow: create project → upload files → finalise → show project link + manage link once
+- [ ] `/p/[id]` project page (status timeline, description, input list, admin message); `noindex` until published
+- [ ] `/p/[id]/manage?t=…`: edit text, add files, reply when `needs_info`, delete
+- [ ] Per-IP limit on project creation (3/day)
 
-## Phase 3 — Jobs and uploads
-- [ ] Schema: `jobs`, `job_files`, `job_events` + migration
-- [ ] `lib/storage.ts`: job folders, safe filenames, streamed writes, sha256
-- [ ] Upload route handler (streamed, size/type checks, 100 MB/file, 20 files/job)
-- [ ] New job form with drag-and-drop and per-file progress
-- [ ] Write `job.json` on submit
-- [ ] Jobs list + job detail with status timeline
-- [ ] Admin jobs queue (filter by status, age)
-- [ ] Windows toast notification on new job (+ optional Resend email)
-- [ ] Rate limit: 5 jobs/day/user
+## Phase 3 — Public gallery
+- [ ] `/` gallery of published projects (cached, revalidated on every write)
+- [ ] Filters by status and building type; empty state
+- [ ] Thumbnails (`output/preview.png` or first image input)
+- [ ] Sitemap + Open Graph for published projects
+- [ ] "Report this project" link (mailto admin)
 
-## Phase 4 — Python tools
-- [ ] Add `ezdxf`, `pymupdf`, `ifcopenshell`, `jinja2` to `tools/ifc-tools`
-- [ ] `prepare`: DXF → `prepared/dxf_geometry.json` (layers, polylines, texts, units)
-- [ ] `prepare`: PDF → `prepared/pages/*.png`
-- [ ] `prepare`: render `PROMPT.md` from template + `job.json`
-- [ ] `validate`: rules from PLAN.md §8, `output/summary.json`, exit codes
-- [ ] Sample files in `tools/ifc-tools/tests/fixtures` + pytest tests
-- [ ] App runs `prepare` after submit and `validate` on "Submit for review" (`IFC_TOOLS_CMD`)
+## Phase 4 — Admin
+- [ ] `ADMIN_PASSWORD` login, signed session cookie, logout; `/admin*` protected
+- [ ] Queue: unapproved first, then by age; counts per status
+- [ ] Project detail: decrypted email, approve/unpublish, set status, public message, delete
+- [ ] Upload outputs (`model.ifc`, `summary.json`, `assumptions.md`, `preview.png`) via client upload → mark completed
+- [ ] `/api/admin/projects` + `/api/admin/projects/[id]` with `ADMIN_API_TOKEN` bearer auth
+- [ ] Optional Resend emails: admin on new project; creator on needs_info / completed
 
-## Phase 5 — Delivery and viewer
-- [ ] Admin job detail: Start / Open folder / Submit for review / Deliver / Needs info / Fail + notes
-- [ ] State machine in `lib/jobs.ts` with `job_events` logging
-- [ ] Download route (session + ownership check)
-- [ ] IFC viewer (That Open Engine): load model, orbit, storey filter
-- [ ] Job page: summary.json table, assumptions.md, download button
-- [ ] Needs-info flow: user reply + extra files → back to `submitted`
-- [ ] User notifications (in-app status; email if Resend configured)
+## Phase 5 — Viewer
+- [ ] That Open Engine viewer component (load IFC from Blob URL, orbit, fit, storey filter)
+- [ ] Summary table from `summary.json`; render `assumptions.md`
+- [ ] Download buttons (IFC + inputs)
+- [ ] Viewer performance check with a 50 MB IFC
 
-## Phase 6 — Conversion toolkit
-- [ ] `docs/SOP-conversion.md` (Route A + B, step by step)
+## Phase 6 — Local tools (`tools/ifc-tools`)
+- [ ] Add `httpx`, `ezdxf`, `pymupdf`, `ifcopenshell`, `jinja2`
+- [ ] `list` and `pull <id>` (admin API → `C:\IFCWiseData\jobs\<id>\`, `job.json`)
+- [ ] `prepare`: DXF → JSON, PDF → PNG, render `PROMPT.md`
+- [ ] `validate`: rules from PLAN.md §8 → `output/summary.json`
+- [ ] Fixtures + pytest
+
+## Phase 7 — Conversion toolkit
+- [ ] `docs/SOP-conversion.md` (Route A + B)
 - [ ] `docs/revit-ifc-export.md` + saved IFC export setup
-- [ ] `IFCWise_Template.rte` with IFC-mapped types (stored outside git or via LFS — decide)
-- [ ] Bonsai/IfcOpenShell starter script (storeys, walls, slabs, openings, spaces)
-- [ ] 3 internal test jobs per input type on both routes; record time + issues in `docs/test-runs.md`
-- [ ] Decide route per input type
-
-## Phase 7 — Retention and polish
-- [ ] Daily cleanup: expire jobs after 30 days, delete folders, keep records
-- [ ] Error pages, empty states, loading states
-- [ ] Mobile check of all app pages
-- [ ] Nightly backup script for `IFCWISE_DATA_DIR`
+- [ ] Revit template with IFC-mapped types (kept out of the public repo)
+- [ ] Bonsai/IfcOpenShell starter script
+- [ ] 3 test projects per input type on both routes; results in `docs/test-runs.md`
 
 ## Phase 8 — Go live
-- [ ] Push to private GitHub repo
-- [ ] Move ifcwise.com DNS to Cloudflare; Vercel project for `apps/www`; apex + www records (DNS only)
-- [ ] `cloudflared` tunnel `app.ifcwise.com → http://localhost:3001` as Windows service
-- [ ] `next start` for `apps/app` as Windows service (NSSM); `docs/deploy-local.md`
-- [ ] Production `.env.local` (secrets, `APP_URL`, `WWW_URL`)
-- [ ] Optional: Cloudflare Access on `/admin*`
-- [ ] Soft launch: invite 10–20 testers; feedback form on completed jobs
+- [ ] Push to GitHub (barkx/AnythingIFC)
+- [ ] Vercel project `ifcwise-www` (root `apps/www`) and `ifcwise-app` (root `apps/app`)
+- [ ] Create Vercel Blob store, connect to `ifcwise-app`; set env vars (PLAN.md §12)
+- [ ] DNS: ifcwise.com nameservers → Vercel; `ifcwise.com`, `www` (redirect), `app.ifcwise.com`
+- [ ] Fill legal entity details; review privacy/terms
+- [ ] Soft launch: 10 test projects, share gallery

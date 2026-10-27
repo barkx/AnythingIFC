@@ -4,7 +4,7 @@ From drawings to IFC. Upload CAD drawings, PDF plans, sketches or a text descrip
 building model back.
 
 - **ifcwise.com** — landing page (`apps/www`, Vercel)
-- **app.ifcwise.com** — web app (`apps/app`, runs locally, published via Cloudflare Tunnel)
+- **app.ifcwise.com** — public projects + admin (`apps/app`, Vercel)
 
 Start with [PLAN.md](PLAN.md) (architecture) and [TASKS.md](TASKS.md) (progress).
 Coding agents: see [AGENTS.md](AGENTS.md).

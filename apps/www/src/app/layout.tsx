@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,9 +15,24 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const description =
+  "Upload CAD drawings, PDF plans, sketches or a text description and get an IFC building model back.";
+
 export const metadata: Metadata = {
-  title: "IFCWise — From drawings to IFC",
-  description: "Upload CAD drawings, PDF plans, sketches or a text description and get an IFC building model back.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "IFCWise — From drawings to IFC",
+    template: "%s · IFCWise",
+  },
+  description,
+  openGraph: {
+    type: "website",
+    siteName: "IFCWise",
+    title: "IFCWise — From drawings to IFC",
+    description,
+    url: "/",
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -23,7 +41,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <SiteHeader />
+        <div className="flex flex-1 flex-col">{children}</div>
+        <SiteFooter />
+      </body>
     </html>
   );
 }
