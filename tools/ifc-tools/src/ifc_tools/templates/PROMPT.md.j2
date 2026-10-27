@@ -1,22 +1,64 @@
-You are modelling a building as IFC at LOD 100–200.
+# IFCWise job {{ job.id }} — {{ job.title }}
 
-Job: {{ title }} — {{ building_type }}, {{ storeys }} storeys, ~{{ approx_area_m2 }} m², units {{ units }}.
+You are modelling a building as IFC at LOD 100–200. Work only inside this folder.
 
-Client description:
-{{ description }}
+## Project
+- Building type: {{ job.buildingType or "not given" }}
+- Storeys: {{ job.storeys or "not given" }}
+- Approx. area: {{ job.approxAreaM2 or "not given" }} {{ "ft²" if job.units == "ft" else "m²" }}
+- Units used by the client: {{ job.units }}
 
-Inputs:
-{% for f in files %}- input/{{ f.filename }} ({{ f.mime }})
+### Client description
+{{ job.description }}
+
+## Inputs (input/)
+{% for f in job.inputs %}
+- `input/{{ f.filename }}` ({{ f.contentType }})
+{% else %}
+- No files — model from the description only.
 {% endfor %}
-Prepared data: prepared/dxf_geometry.json (if any), prepared/pages/*.png (if any)
 
-Rules:
-- Storey height 3.0 m, exterior walls 300 mm, interior walls 120 mm, slabs 200 mm unless the inputs say otherwise.
+## Prepared data (prepared/)
+{% if report.geometry %}
+DXF geometry as JSON (per layer: lines, polylines, arcs, texts, block inserts, dimensions; see `units`):
+{% for g in report.geometry %}
+- `{{ g }}`
+{% endfor %}
+{% endif %}
+{% if report.pages %}
+PDF pages rendered as images:
+{% for p in report.pages %}
+- `{{ p }}`
+{% endfor %}
+{% endif %}
+{% if not report.geometry and not report.pages %}
+- Nothing extracted — work from the original inputs.
+{% endif %}
+{% for name, text in report.texts.items() %}
+
+### Text from `input/{{ name }}`
+```
+{{ text }}
+```
+{% endfor %}
+{% if report.notes %}
+
+### Preparation notes
+{% for n in report.notes %}
+- {{ n }}
+{% endfor %}
+{% endif %}
+
+## Rules
+- Unless the inputs say otherwise: storey height 3.0 m, exterior walls 300 mm, interior walls 120 mm, slabs 200 mm.
 - One level per storey, named "Ground Floor", "First Floor", …
 - Doors 900×2100, windows 1200×1200 with 900 sill, unless shown otherwise.
 - Create spaces/rooms named from drawing text where available.
 - Do not invent elements the inputs don't support.
-- List every assumption in output/assumptions.md.
+- Metres, IFC4. Every element must be contained in a storey.
+- List every assumption in `output/assumptions.md` (it is shown publicly next to the model).
 
-Deliver: the model in Revit (route A, then export to output/model.ifc) or output/model.ifc directly (route B),
-plus output/assumptions.md.
+## Deliver
+- Route A (Revit): model with the Revit MCP, export IFC4 Reference View to `output/model.ifc`.
+- Route B (Bonsai/IfcOpenShell): write the IFC directly to `output/model.ifc`.
+- Then run `npm run tools -- validate {{ job.id }}` and fix any errors.

@@ -41,11 +41,12 @@ npm run dev:app                   # app only
 npm run build                     # build all workspaces
 npm run lint                      # lint all workspaces
 npm run typecheck                 # tsc --noEmit in all workspaces
-uv run --project tools/ifc-tools ifc-tools --help
+npm run tools -- --help             # ifc-tools: list, pull, prepare, validate
+npm run test:tools                  # pytest for tools/ifc-tools
 ```
 
-Before saying a task is done: `npm run typecheck`, `npm run lint` and `npm run build` must pass,
-and for UI changes the page must be checked in a browser.
+Before saying a task is done: `npm run typecheck`, `npm run lint` and `npm run build` must pass
+(plus `npm run test:tools` and `ruff check` for Python changes), and UI changes must be checked in a browser.
 
 ## Stack and conventions
 

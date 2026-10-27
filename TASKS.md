@@ -3,7 +3,7 @@
 Source of truth for progress. Agents: take the first unchecked task in the current phase,
 tick it when done (`- [x]`), and add a short note after it if useful. Details for each phase are in [PLAN.md](PLAN.md).
 
-**Current phase: 6 — Local tools** (Phases 2–5 need an end-to-end test with a Blob token)
+**Current phase: 7 — Conversion toolkit** (Phases 2–6 need an end-to-end test with a Blob token)
 
 ---
 
@@ -78,11 +78,12 @@ tick it when done (`- [x]`), and add a short note after it if useful. Details fo
 - [ ] Test on a real project page once Blob is configured (CORS from Blob URL, summary + assumptions rendering)
 
 ## Phase 6 — Local tools (`tools/ifc-tools`)
-- [ ] Add `httpx`, `ezdxf`, `pymupdf`, `ifcopenshell`, `jinja2`
-- [ ] `list` and `pull <id>` (admin API → `C:\IFCWiseData\jobs\<id>\`, `job.json`)
-- [ ] `prepare`: DXF → JSON, PDF → PNG, render `PROMPT.md`
-- [ ] `validate`: rules from PLAN.md §8 → `output/summary.json`
-- [ ] Fixtures + pytest
+- [x] Add `httpx`, `ezdxf`, `pymupdf`, `ifcopenshell`, `jinja2`, `python-dotenv` (+ `pytest`, `ruff`)
+- [x] `list` and `pull <id>` (admin API → `IFCWISE_DATA_DIR/jobs/<id>/`, `job.json`; token never sent to Blob)
+- [x] `prepare`: DXF → `<name>.geometry.json` per layer, DWG → DXF via optional ODA converter, PDF → PNG pages, text inputs inlined, `PROMPT.md`
+- [x] `validate`: rules from PLAN.md §8 → `output/summary.json` (`ModelSummary`), exit 1 on errors
+- [x] Fixtures + pytest (12 tests: validate, prepare with generated DXF/PDF, pull with mocked API)
+- [ ] `pull` against the real app once Blob + `ADMIN_API_TOKEN` are configured
 
 ## Phase 7 — Conversion toolkit
 - [ ] `docs/SOP-conversion.md` (Route A + B)
