@@ -3,7 +3,7 @@
 Source of truth for progress. Agents: take the first unchecked task in the current phase,
 tick it when done (`- [x]`), and add a short note after it if useful. Details for each phase are in [PLAN.md](PLAN.md).
 
-**Current phase: 7 — Conversion toolkit** (Phases 2–6 need an end-to-end test with a Blob token)
+**Current phase: 8 — Go live** (Phases 2–6 need an end-to-end test with a Blob token; Phase 7 needs test runs in Revit)
 
 ---
 
@@ -86,11 +86,16 @@ tick it when done (`- [x]`), and add a short note after it if useful. Details fo
 - [ ] `pull` against the real app once Blob + `ADMIN_API_TOKEN` are configured
 
 ## Phase 7 — Conversion toolkit
-- [ ] `docs/SOP-conversion.md` (Route A + B)
-- [ ] `docs/revit-ifc-export.md` + saved IFC export setup
-- [ ] Revit template with IFC-mapped types (kept out of the public repo)
-- [ ] Bonsai/IfcOpenShell starter script
+- [x] `docs/SOP-conversion.md` (review → pull → route choice → Route A / Route B → check → deliver → log)
+- [x] `docs/revit-ifc-export.md`: "IFCWise IFC4 RV" exporter setup + troubleshooting
+- [x] Route B builder: `ifc-tools build` turns `output/model-spec.json` into IFC4 (typed walls, slabs, flat roof,
+      doors/windows in openings, spaces with floor areas); validates clean with no warnings; 8 more tests (20 total)
+- [x] `PROMPT.md` explains both routes and the model-spec format
+- [x] `docs/test-runs.md` log template
+- [ ] Revit template `IFCWise_Template.rte` with IFC-mapped types (kept outside the public repo) _(user, in Revit)_
+- [ ] Save the IFC export setup in Revit and export it to `C:\IFCWiseData\revit\` _(user, in Revit)_
 - [ ] 3 test projects per input type on both routes; results in `docs/test-runs.md`
+- [ ] Pitched roofs in the model spec (currently flat only)
 
 ## Phase 8 — Go live
 - [ ] Push to GitHub (barkx/AnythingIFC)

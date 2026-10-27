@@ -7,6 +7,7 @@ import typer
 
 from ifc_tools import __version__
 from ifc_tools.api import AdminApi, ApiError
+from ifc_tools.builder import SpecError, build_job
 from ifc_tools.config import load_settings
 from ifc_tools.prepare import prepare as prepare_job
 from ifc_tools.pull import pull as pull_job
@@ -118,6 +119,19 @@ def validate(job: str) -> None:
     if not result.ok:
         raise typer.Exit(1)
     typer.echo("  OK - upload output/ files on the admin page.")
+
+
+@app.command()
+def build(job: str) -> None:
+    """Route B: turn output/model-spec.json into output/model.ifc, then validate it."""
+    job_dir = _job_dir(job)
+    try:
+        target = build_job(job_dir)
+    except (FileNotFoundError, SpecError) as error:
+        typer.echo(str(error), err=True)
+        raise typer.Exit(1)
+    typer.echo(f"built {target}")
+    validate(str(job_dir))
 
 
 @app.command()

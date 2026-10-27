@@ -184,6 +184,7 @@ ifc-tools pull <id>          # GET /api/admin/projects/<id> with ADMIN_API_TOKEN
 ifc-tools prepare <job-dir>  # DXF → prepared/dxf_geometry.json, PDF → prepared/pages/*.png, PROMPT.md
 ifc-tools validate <job-dir> # check output/model.ifc → output/summary.json, exit 1 on errors
 ifc-tools list               # projects waiting for work
+ifc-tools build <job-dir>    # Route B: output/model-spec.json -> output/model.ifc, then validate
 ```
 
 Job folder: `C:\IFCWiseData\jobs\<id>\{job.json, input\, prepared\, PROMPT.md, revit\, bonsai\, output\}`.
@@ -199,7 +200,8 @@ metre units; ≥1 `IfcWall`; every element contained in a storey. Warnings: no `
 Route A — Codex + Revit MCP: `ifc-tools pull`, open template, underlay DWG/PDF/images, run Codex with
 PROMPT.md, fix by hand, export IFC4 Reference View, write `assumptions.md`, `ifc-tools validate`, upload.
 
-Route B — Blender + Bonsai: Codex/Claude writes IfcOpenShell scripts that create the IFC directly.
+Route B — model spec: Codex/Claude writes `output/model-spec.json` (storeys, wall centre lines, openings, spaces,
+flat roof) and `ifc-tools build` turns it into IFC4; Blender + Bonsai for inspection and manual fixes.
 Both routes compared on the first test projects. Full steps in `docs/SOP-conversion.md`.
 
 ---

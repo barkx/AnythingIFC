@@ -10,6 +10,7 @@ npm run tools -- list                 # projects waiting for work (--all for eve
 npm run tools -- pull <id>            # download inputs to C:\IFCWiseData\jobs\<id>\ and run prepare
 npm run tools -- prepare <id|folder>  # re-run preparation, re-render PROMPT.md
 npm run tools -- validate <id|folder> # check output/model.ifc, write output/summary.json (exit 1 on errors)
+npm run tools -- build <id|folder>    # Route B: output/model-spec.json -> output/model.ifc, then validate
 npm run test:tools                    # pytest
 ```
 
@@ -48,6 +49,12 @@ Errors: file parses; schema IFC4; exactly one `IfcProject` and `IfcSite`; at lea
 `IfcBuildingStorey`; length unit matches the project (m or ft); at least one `IfcWall`; every element is in
 a storey. Warnings: no `IfcSpace`, no openings, no element types. `summary.json` follows `ModelSummary` in
 `packages/shared`.
+
+## Route B model spec
+
+`build` (`src/ifc_tools/builder.py`) turns `output/model-spec.json` into IFC4 with typed walls, slabs, a flat
+roof, openings filled with doors/windows, and spaces with floor-area quantities. Format and reference:
+module docstring and `docs/SOP-conversion.md`.
 
 ## Test fixture
 

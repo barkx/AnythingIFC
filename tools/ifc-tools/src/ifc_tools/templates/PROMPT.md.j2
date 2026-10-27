@@ -58,7 +58,37 @@ PDF pages rendered as images:
 - Metres, IFC4. Every element must be contained in a storey.
 - List every assumption in `output/assumptions.md` (it is shown publicly next to the model).
 
-## Deliver
-- Route A (Revit): model with the Revit MCP, export IFC4 Reference View to `output/model.ifc`.
-- Route B (Bonsai/IfcOpenShell): write the IFC directly to `output/model.ifc`.
-- Then run `npm run tools -- validate {{ job.id }}` and fix any errors.
+## Deliver — the operator tells you which route
+
+### Route A — Revit (via the Revit MCP)
+1. The operator has opened the IFCWise template and linked the inputs as underlays.
+2. Create levels, then walls, floors, roof, doors, windows and rooms with the Revit MCP, using the
+   coordinates in `prepared/*.geometry.json` where available (convert drawing units to metres).
+3. Stop and report; the operator checks the model and exports IFC4 Reference View to `output/model.ifc`.
+
+### Route B — model spec (no Revit)
+Write `output/model-spec.json`, then run `npm run tools -- build {{ job.id }}` (it builds `output/model.ifc`
+and validates it). Format, all lengths in metres; wall `start`/`end` are the wall centre line, opening
+`offset` is measured along the wall from `start`:
+```json
+{
+  "project": "{{ job.title }}",
+  "defaults": {"wallThickness": 0.3, "storeyHeight": 3.0, "slabThickness": 0.2},
+  "storeys": [
+    {"name": "Ground Floor", "elevation": 0.0, "height": 3.0,
+     "slab": {"outline": [[0, 0], [10, 0], [10, 12], [0, 12]]},
+     "walls": [
+       {"start": [0, 0], "end": [10, 0], "thickness": 0.3,
+        "openings": [{"type": "door", "offset": 2.0, "width": 0.9, "height": 2.1},
+                     {"type": "window", "offset": 5.0, "width": 1.2, "height": 1.2, "sill": 0.9}]}
+     ],
+     "spaces": [{"name": "Living", "outline": [[0.15, 0.15], [5, 0.15], [5, 11.85], [0.15, 11.85]]}]}
+  ],
+  "roof": {"outline": [[0, 0], [10, 0], [10, 12], [0, 12]], "thickness": 0.2}
+}
+```
+Only flat roofs are supported by `build`; describe pitched roofs in `assumptions.md` (or use Route A).
+
+### Both routes
+- Write `output/assumptions.md`.
+- `npm run tools -- validate {{ job.id }}` must pass (warnings are OK if explained in the assumptions).
