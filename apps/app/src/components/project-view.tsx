@@ -1,4 +1,5 @@
 import { BUILDING_TYPE_LABELS, PROJECT_STATUS_LABELS, type PublicProject } from "@ifcwise/shared";
+import { ModelSection } from "@/components/model-section";
 import { StatusBadge, formatBytes } from "@/components/ui";
 
 const dateFormat = new Intl.DateTimeFormat("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: "UTC" });
@@ -41,13 +42,7 @@ export function ProjectView({ project }: { project: PublicProject }) {
 
       <section>
         <h2 className="text-lg font-semibold">Model</h2>
-        {project.outputs.length ? (
-          <FileList files={project.outputs} />
-        ) : (
-          <p className="mt-2 rounded-xl border border-dashed border-border p-6 text-center text-sm text-muted">
-            The IFC model will appear here when it&apos;s ready.
-          </p>
-        )}
+        <ModelSection project={project} />
       </section>
 
       <section>

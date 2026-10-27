@@ -112,3 +112,12 @@ export const ALLOWED_OUTPUT_EXTENSIONS = [".ifc", ".json", ".md", ".png"] as con
 export const MAX_FILE_BYTES = 100 * 1024 * 1024;
 export const MAX_FILES_PER_PROJECT = 20;
 export const MAX_PROJECTS_PER_IP_PER_DAY = 3;
+
+// output/summary.json, written by `ifc-tools validate` (tools/ifc-tools) and shown on the project page.
+export type ModelSummary = {
+  schema: string; // e.g. "IFC4"
+  counts: Record<string, number>; // IFC class → element count, e.g. { IfcWall: 24 }
+  storeys: { name: string; elevation?: number; counts: Record<string, number> }[];
+  floorAreaM2?: number;
+  warnings: string[];
+};

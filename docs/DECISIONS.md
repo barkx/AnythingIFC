@@ -3,6 +3,18 @@
 Short log of architecture and convention decisions. Newest at the top.
 Format: date — decision — why — consequences.
 
+## 2026-10-27 — IFC viewer: That Open Engine with pinned three and web-ifc
+- **Decision:** `@thatopen/components` 3.6 in a client-only component; fragments worker and web-ifc WASM
+  self-hosted from `public/vendor`. Pinned via root `package.json` `overrides`: `three@0.182.0`,
+  `web-ifc@0.0.77`. `turbopack.ignoreIssue` suppresses "Export X doesn't exist" issues from `@thatopen/fragments`.
+- **Why:** fragments bundles its own web-ifc JS API built against 0.0.77, so the WASM must be 0.0.77
+  (0.0.78 fails with "StreamMeshes called with 4 arguments, expected 3"). Fragments feature-checks
+  WebGPU-only members (`THREE.MRTNode`, `THREE.TSL`, `THREE.NodeMaterial`, `THREE.WebGPURenderer`) on the
+  main `three` entry; Turbopack reports these as errors, though they're just `undefined` at runtime.
+- **Consequences:** when upgrading `@thatopen/*`, check its `devDependencies` for the matching `three` and
+  `web-ifc` versions and update the overrides. Fallback if Turbopack stops honouring `ignoreIssue`: bundle the
+  viewer separately with esbuild into `public/vendor` and load it with `import(/* webpackIgnore: true */ …)`.
+
 ## 2026-10-27 — Public projects on Vercel, PC for computation only (supersedes local-first + invite codes)
 - **Decision:** `apps/app` runs on Vercel. Anyone can create a project; all projects are public and appear in
   the gallery after admin approval. Storage is Vercel Blob only (`project.json` per project, no database).

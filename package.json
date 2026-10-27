@@ -19,5 +19,9 @@
   },
   "devDependencies": {
     "concurrently": "^10.0.6"
+  },
+  "overrides": {
+    "three": "0.182.0",
+    "web-ifc": "0.0.77"
   }
 }
