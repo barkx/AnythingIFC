@@ -1,0 +1,23 @@
+{
+  "name": "ifcwise",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n www,app -c blue,green \"npm:dev:www\" \"npm:dev:app\"",
+    "dev:www": "npm run dev -w apps/www",
+    "dev:app": "npm run dev -w apps/app",
+    "build": "npm run build --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "tools": "uv run --project tools/ifc-tools ifc-tools"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.6"
+  }
+}

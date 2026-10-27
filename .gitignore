@@ -1,0 +1,43 @@
+# dependencies
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+
+# builds
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# env and secrets
+.env
+.env.local
+.env.*.local
+.env.production
+
+# local data (customer files must never be committed)
+.data/
+*.db
+*.db-shm
+*.db-wal
+IFCWiseData/
+
+# tools
+.vercel/
+.turbo/
+.ruff_cache/
+.pytest_cache/
+coverage/
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+*.log

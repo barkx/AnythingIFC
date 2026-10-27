@@ -1,0 +1,22 @@
+You are modelling a building as IFC at LOD 100–200.
+
+Job: {{ title }} — {{ building_type }}, {{ storeys }} storeys, ~{{ approx_area_m2 }} m², units {{ units }}.
+
+Client description:
+{{ description }}
+
+Inputs:
+{% for f in files %}- input/{{ f.filename }} ({{ f.mime }})
+{% endfor %}
+Prepared data: prepared/dxf_geometry.json (if any), prepared/pages/*.png (if any)
+
+Rules:
+- Storey height 3.0 m, exterior walls 300 mm, interior walls 120 mm, slabs 200 mm unless the inputs say otherwise.
+- One level per storey, named "Ground Floor", "First Floor", …
+- Doors 900×2100, windows 1200×1200 with 900 sill, unless shown otherwise.
+- Create spaces/rooms named from drawing text where available.
+- Do not invent elements the inputs don't support.
+- List every assumption in output/assumptions.md.
+
+Deliver: the model in Revit (route A, then export to output/model.ifc) or output/model.ifc directly (route B),
+plus output/assumptions.md.
