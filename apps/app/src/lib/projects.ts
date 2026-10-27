@@ -2,7 +2,7 @@ import "server-only";
 import { del, get, head, list, put, BlobPreconditionFailedError } from "@vercel/blob";
 import type { ProjectEvent, ProjectFile, ProjectStatus, PublicProject } from "@ifcwise/shared";
 import { env } from "@/lib/env";
-import { inputPrefix, projectJsonPath, projectPrefix, sanitizeFilename } from "@/lib/blob-paths";
+import { projectJsonPath, projectPrefix, sanitizeFilename } from "@/lib/blob-paths";
 import { tokenMatches } from "@/lib/crypto";
 
 // The full record as stored in projects/<id>/project.json. The file is publicly reachable by URL,
@@ -68,12 +68,11 @@ export function addEvent(project: StoredProject, by: ProjectEvent["by"], status:
   project.events.push({ at: new Date().toISOString(), by, status, ...(note ? { note } : {}) });
 }
 
-// Confirms each browser-uploaded blob really exists under this project's input folder.
-export async function verifyInputs(
-  id: string,
+// Confirms each browser-uploaded blob really exists under the given project folder.
+export async function verifyUploads(
+  prefix: string,
   files: { pathname: string; url: string; filename: string }[],
 ): Promise<ProjectFile[]> {
-  const prefix = inputPrefix(id);
   return Promise.all(
     files.map(async (file) => {
       if (!file.pathname.startsWith(prefix)) throw new Error("File does not belong to this project.");

@@ -1,5 +1,5 @@
 // Blob path rules. Shared by server code and the upload form, so no server-only imports here.
-import { ALLOWED_UPLOAD_EXTENSIONS } from "@ifcwise/shared";
+import { ALLOWED_OUTPUT_EXTENSIONS, ALLOWED_UPLOAD_EXTENSIONS } from "@ifcwise/shared";
 
 export const projectPrefix = (id: string) => `projects/${id}/`;
 export const projectJsonPath = (id: string) => `projects/${id}/project.json`;
@@ -13,6 +13,10 @@ export function fileExtension(filename: string): string {
 
 export function isAllowedInput(filename: string): boolean {
   return (ALLOWED_UPLOAD_EXTENSIONS as readonly string[]).includes(fileExtension(filename));
+}
+
+export function isAllowedOutput(filename: string): boolean {
+  return (ALLOWED_OUTPUT_EXTENSIONS as readonly string[]).includes(fileExtension(filename));
 }
 
 // Keep names readable but safe for URLs and Windows paths.

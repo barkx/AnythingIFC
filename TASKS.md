@@ -3,7 +3,7 @@
 Source of truth for progress. Agents: take the first unchecked task in the current phase,
 tick it when done (`- [x]`), and add a short note after it if useful. Details for each phase are in [PLAN.md](PLAN.md).
 
-**Current phase: 2 — Projects on Blob**
+**Current phase: 5 — Viewer** (Phases 2–4 need an end-to-end test with a Blob token)
 
 ---
 
@@ -50,18 +50,21 @@ tick it when done (`- [x]`), and add a short note after it if useful. Details fo
 - [ ] End-to-end test with a real Blob store: create with files, view, manage, add files, edit, delete
 
 ## Phase 3 — Public gallery
-- [ ] `/` gallery of published projects (cached, revalidated on every write)
-- [ ] Filters by status and building type; empty state
-- [ ] Thumbnails (`output/preview.png` or first image input)
-- [ ] Sitemap + Open Graph for published projects
-- [ ] "Report this project" link (mailto admin)
+- [x] `/` gallery of published projects (`use cache` + `cacheTag("projects")`, invalidated with `updateTag` on every write)
+- [x] Filters by status and building type (query string, no client JS); empty states
+- [x] Thumbnails (`output/*.png` or first image input) via `next/image` with Blob remote pattern
+- [x] Sitemap of published projects, robots.txt, per-project metadata (indexed only when listed)
+- [x] "Report this project" link (mailto `NEXT_PUBLIC_CONTACT_EMAIL`)
 
 ## Phase 4 — Admin
-- [ ] `ADMIN_PASSWORD` login, signed session cookie, logout; `/admin*` protected
-- [ ] Queue: unapproved first, then by age; counts per status
-- [ ] Project detail: decrypted email, approve/unpublish, set status, public message, delete
-- [ ] Upload outputs (`model.ifc`, `summary.json`, `assumptions.md`, `preview.png`) via client upload → mark completed
-- [ ] `/api/admin/projects` + `/api/admin/projects/[id]` with `ADMIN_API_TOKEN` bearer auth
+- [x] `ADMIN_PASSWORD` login (rate-limited), HMAC-signed session cookie (7 days), logout
+- [x] `/admin*` protected: `proxy.ts` optimistic redirect + `requireAdmin()` on the server
+- [x] Queue: awaiting review first (oldest first), counts per status, age
+- [x] Project detail: decrypted email, approve/unpublish, set status + note, public message / ask question (→ needs_info), delete
+- [x] Upload outputs via client upload (admin cookie checked in `/api/upload`) → "Upload & complete"; remove outputs
+- [x] `/api/admin/projects` + `/api/admin/projects/[id]` with `ADMIN_API_TOKEN` bearer auth (no email in responses)
+- [ ] Set `ADMIN_PASSWORD` in `apps/app/.env.local` _(user)_
+- [ ] End-to-end test with Blob token: login, approve, ask question, creator reply, upload outputs, gallery shows project, delete
 - [ ] Optional Resend emails: admin on new project; creator on needs_info / completed
 
 ## Phase 5 — Viewer

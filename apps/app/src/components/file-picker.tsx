@@ -5,18 +5,24 @@ import { useRef, useState, type DragEvent } from "react";
 import { formatBytes } from "@/components/ui";
 import { isAllowedInput } from "@/lib/blob-paths";
 
+const INPUT_ACCEPT = ALLOWED_UPLOAD_EXTENSIONS as readonly string[];
+
 export function FilePicker({
   files,
   onChange,
   maxFiles,
   progress,
   disabled,
+  accept = INPUT_ACCEPT,
+  isAllowed = isAllowedInput,
 }: {
   files: File[];
   onChange: (files: File[]) => void;
   maxFiles: number;
   progress?: number[];
   disabled?: boolean;
+  accept?: readonly string[];
+  isAllowed?: (filename: string) => boolean;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [dragging, setDragging] = useState(false);
@@ -25,7 +31,7 @@ export function FilePicker({
   function add(list: FileList | null) {
     if (!list) return;
     const incoming = Array.from(list);
-    const rejected = incoming.filter((f) => !isAllowedInput(f.name) || f.size > MAX_FILE_BYTES);
+    const rejected = incoming.filter((f) => !isAllowed(f.name) || f.size > MAX_FILE_BYTES);
     const accepted = incoming.filter((f) => !rejected.includes(f));
     const next = [...files, ...accepted].slice(0, maxFiles);
     setProblem(
@@ -59,7 +65,7 @@ export function FilePicker({
       >
         <p className="font-medium">Drop files here</p>
         <p className="text-muted">
-          {ALLOWED_UPLOAD_EXTENSIONS.join(" ")} · up to {formatBytes(MAX_FILE_BYTES)} each · max {maxFiles} files
+          {accept.join(" ")} · up to {formatBytes(MAX_FILE_BYTES)} each · max {maxFiles} files
         </p>
         <button
           type="button"
@@ -74,7 +80,7 @@ export function FilePicker({
           type="file"
           multiple
           hidden
-          accept={ALLOWED_UPLOAD_EXTENSIONS.join(",")}
+          accept={accept.join(",")}
           onChange={(e) => {
             add(e.target.files);
             e.target.value = "";

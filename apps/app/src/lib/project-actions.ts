@@ -1,10 +1,12 @@
 "use server";
 
 import { MAX_FILES_PER_PROJECT, MAX_PROJECTS_PER_IP_PER_DAY } from "@ifcwise/shared";
+import { updateTag } from "next/cache";
 import { z } from "zod";
-import { ID_PATTERN } from "@/lib/blob-paths";
+import { ID_PATTERN, inputPrefix } from "@/lib/blob-paths";
 import { encryptEmail, hashToken, newManageToken, newProjectId } from "@/lib/crypto";
 import { ConfigError } from "@/lib/env";
+import { PROJECTS_TAG } from "@/lib/project-list";
 import { newProjectSchema, projectDetailsSchema, uploadedFileSchema } from "@/lib/project-schema";
 import {
   addEvent,
@@ -12,7 +14,7 @@ import {
   deleteProjectBlobs,
   readProject,
   updateProject,
-  verifyInputs,
+  verifyUploads,
   writeProject,
   type StoredProject,
 } from "@/lib/projects";
@@ -81,13 +83,14 @@ export async function attachFiles(
   try {
     await loadManaged(projectId, manageToken);
     const parsed = z.array(uploadedFileSchema).max(MAX_FILES_PER_PROJECT).parse(files);
-    const verified = await verifyInputs(projectId, parsed);
+    const verified = await verifyUploads(inputPrefix(projectId), parsed);
     await updateProject(projectId, (p) => {
       const known = new Set(p.inputs.map((f) => f.pathname));
       p.inputs.push(...verified.filter((f) => !known.has(f.pathname)).slice(0, MAX_FILES_PER_PROJECT - p.inputs.length));
       if (submit && p.status === "draft") addEvent(p, "creator", "submitted");
       else if (verified.length) p.events.push({ at: new Date().toISOString(), by: "creator", status: p.status, note: `Added ${verified.length} file(s).` });
     });
+    updateTag(PROJECTS_TAG);
     return { ok: true };
   } catch (error) {
     return fail(error);
@@ -100,6 +103,7 @@ export async function submitDraft(projectId: string, manageToken: string): Promi
     await updateProject(projectId, (p) => {
       if (p.status === "draft") addEvent(p, "creator", "submitted");
     });
+    updateTag(PROJECTS_TAG);
     return { ok: true };
   } catch (error) {
     return fail(error);
@@ -113,6 +117,7 @@ export async function updateDetails(projectId: string, manageToken: string, inpu
     await updateProject(projectId, (p) => {
       Object.assign(p, data);
     });
+    updateTag(PROJECTS_TAG);
     return { ok: true };
   } catch (error) {
     return fail(error);
@@ -126,6 +131,7 @@ export async function replyToAdmin(projectId: string, manageToken: string, messa
     await updateProject(projectId, (p) => {
       addEvent(p, "creator", p.status === "needs_info" ? "in_progress" : p.status, note);
     });
+    updateTag(PROJECTS_TAG);
     return { ok: true };
   } catch (error) {
     return fail(error);
@@ -136,6 +142,7 @@ export async function deleteProject(projectId: string, manageToken: string): Pro
   try {
     await loadManaged(projectId, manageToken);
     await deleteProjectBlobs(projectId);
+    updateTag(PROJECTS_TAG);
     return { ok: true };
   } catch (error) {
     return fail(error);
